@@ -13,7 +13,7 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
   @override
   Widget build(context) {
     final announcements = ref.watch(announcementProvider);
-
+    final tileColor = Theme.of(context).colorScheme.primary;
     return Scaffold(
         appBar: AppBar(
           title: const Text("Announcement"),
@@ -30,7 +30,7 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
                     borderRadius: BorderRadius.circular(8)),
                 clipBehavior: Clip.hardEdge,
                 elevation: 5,
-                color: Theme.of(context).colorScheme.secondary,
+                color: tileColor,
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 12, horizontal: 15),

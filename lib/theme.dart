@@ -4,11 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 var kcolorScheme = ColorScheme.fromSeed(
   seedColor: const Color(0xff091235),
 ).copyWith(
-  background: const Color.fromRGBO(255, 255, 255, 1),
-  primary: const Color(0xff091235),
-  secondary: const Color(0xff2B4257),
+  background: const Color.fromARGB(255, 245, 242, 228),
+  primary: const Color(0xff2B4257),
+  secondary: const Color(0xff091235),
   tertiary: const Color.fromARGB(197, 107, 120, 131),
-  surface: const Color.fromRGBO(255, 255, 255, 1),
+  surface: const Color.fromARGB(255, 245, 242, 228),
 );
 
 //);
@@ -28,7 +28,7 @@ final selfTheme = ThemeData().copyWith(
   appBarTheme: const AppBarTheme().copyWith(
     titleTextStyle: GoogleFonts.ubuntuCondensed(
       fontWeight: FontWeight.bold,
-      color: kcolorScheme.primary,
+      color: kcolorScheme.secondary,
       fontSize: 35,
     ),
   ),
