@@ -17,6 +17,9 @@ class BeginScreen extends ConsumerWidget {
 
   @override
   Widget build(context, WidgetRef ref) {
+    print(MediaQuery.of(context).size.width);
+    print(MediaQuery.of(context).size.height);
+
     final announcements = ref.watch(announcementProvider);
     return Scaffold(
       appBar: AppBar(
@@ -30,7 +33,7 @@ class BeginScreen extends ConsumerWidget {
             BoxProp(
               onPressed: () {},
               headingText: 'Announcements',
-              contentText: announcements.first.content,
+              contentText: "asdas",
             ),
             const SizedBox(height: 20),
             Row(

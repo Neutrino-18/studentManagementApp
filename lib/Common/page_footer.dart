@@ -23,7 +23,7 @@ class IconFooterState extends ConsumerState<IconFooter> {
 
   final List<Widget> screens = [
     const BeginScreen(),
-    const SecondScreen(),
+    const ProviderScope(child: SecondScreen()),
     const ThirdScreen(),
     const ProfileScreen(),
   ];
