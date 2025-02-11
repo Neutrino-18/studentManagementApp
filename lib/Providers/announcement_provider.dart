@@ -21,12 +21,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // );
 
 final apiServiceProvider = Provider<ApiHelper>((ref) {
-  print('Reached Provider');
+  // print('Reached Provider');
   return ApiHelper();
 });
 
 final announcementProvider = FutureProvider<List<Announcement>>((ref) async {
-  print('Reached Future provider');
+  // print('Reached Future provider');
   final apiService = ref.watch(apiServiceProvider);
 
   return apiService.fetchAnnouncements();

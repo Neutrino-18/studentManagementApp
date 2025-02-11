@@ -1,6 +1,5 @@
 import "package:app_crt/Common/box_prop.dart";
 import "package:app_crt/Extra/scrollable_box.dart";
-import "package:app_crt/Pages/announce_page.dart";
 import "package:app_crt/Providers/announcement_provider.dart";
 import "package:app_crt/Providers/index_provider.dart";
 import "package:flutter/material.dart";
@@ -10,7 +9,8 @@ import 'package:intl/intl.dart';
 //
 //
 //
-const secondPageIndex = 1;
+const announcementPageIndex = 1;
+const batchPageIndex = 2;
 final now = DateTime.now();
 String formattedDate = DateFormat('MMMM d, y').format(now);
 //
@@ -35,10 +35,12 @@ class BeginScreen extends ConsumerWidget {
             const SizedBox(height: 20),
             BoxProp(
               onPressed: () {
-                ref.read(indexProvider.notifier).changeIndex(secondPageIndex);
+                ref.read(indexProvider.notifier).state = announcementPageIndex;
               },
               headingText: 'Announcement',
-              contentText: topAnnouncements.value.toString(),
+              contentText: topAnnouncements.value != null
+                  ? topAnnouncements.value.toString()
+                  : "Connection Issue",
             ),
             const SizedBox(height: 20),
             Row(
@@ -59,7 +61,9 @@ class BeginScreen extends ConsumerWidget {
             const AnimatedBoxScreen(),
             const SizedBox(height: 20),
             BoxProp(
-              onPressed: () {},
+              onPressed: () {
+                ref.read(indexProvider.notifier).state = batchPageIndex;
+              },
               headingText: 'Batch Msg',
               contentText:
                   'You are adviced not to pretend like somebody else or else you will not be given freedom',
@@ -69,7 +73,9 @@ class BeginScreen extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ref.read(indexProvider.notifier).state = 4;
+                  },
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size.square(165),
                     backgroundColor: Theme.of(context).colorScheme.primary,

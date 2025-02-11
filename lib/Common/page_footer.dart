@@ -1,7 +1,9 @@
 import 'package:app_crt/Pages/announce_page.dart';
 import 'package:app_crt/Pages/batch_page.dart';
 import 'package:app_crt/Pages/first_page.dart';
+import 'package:app_crt/Pages/performance_page.dart';
 import 'package:app_crt/Pages/profile_page.dart';
+import 'package:app_crt/Providers/index_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -18,31 +20,28 @@ class IconFooter extends ConsumerStatefulWidget {
 }
 
 class IconFooterState extends ConsumerState<IconFooter> {
-  int _activeScreen = 0;
-
   final List<Widget> screens = [
     const BeginScreen(),
     const SecondScreen(),
     const ThirdScreen(),
     const ProfileScreen(),
+    const StudentPerformance(),
   ];
-
-  void _switchScreen(int index) {
-    setState(() {
-      _activeScreen = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
+    final tabIndex = ref.watch(indexProvider);
+    print("Tab Index is $tabIndex");
     var backColor = Theme.of(context).colorScheme.background;
     return Scaffold(
-      body: screens[_activeScreen],
+      body: screens[tabIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.shifting,
-        currentIndex: _activeScreen,
-        onTap: _switchScreen,
-        showSelectedLabels: false,
+        currentIndex: tabIndex == 4 ? 0 : tabIndex,
+        onTap: (index) {
+          ref.read(indexProvider.notifier).state = index;
+        },
+        showSelectedLabels: tabIndex == 4 ? true : false,
         showUnselectedLabels: true,
         enableFeedback: false,
         items: [
