@@ -16,15 +16,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 //   }
 // }
 
-// final announcementProvider =
-//     StateNotifierProvider<AnnouncementNotifier, List<Announcement>>(
-//   (ref) => AnnouncementNotifier(),
+// final announcementProvider = Provider<List<Announcement>>(
+//   (ref) => [const Announcement(content: 'Hello')],
 // );
 
-final apiServiceProvider = Provider<ApiHelper>((ref) => ApiHelper());
+final apiServiceProvider = Provider<ApiHelper>((ref) {
+  print('Reached Provider');
+  return ApiHelper();
+});
 
 final announcementProvider = FutureProvider<List<Announcement>>((ref) async {
-  final apiService = ref.read(apiServiceProvider);
+  print('Reached Future provider');
+  final apiService = ref.watch(apiServiceProvider);
 
   return apiService.fetchAnnouncements();
 });

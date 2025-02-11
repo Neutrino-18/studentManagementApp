@@ -1,6 +1,8 @@
 import "package:app_crt/Common/box_prop.dart";
 import "package:app_crt/Extra/scrollable_box.dart";
+import "package:app_crt/Pages/announce_page.dart";
 import "package:app_crt/Providers/announcement_provider.dart";
+import "package:app_crt/Providers/index_provider.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import 'package:intl/intl.dart';
@@ -8,6 +10,7 @@ import 'package:intl/intl.dart';
 //
 //
 //
+const secondPageIndex = 1;
 final now = DateTime.now();
 String formattedDate = DateFormat('MMMM d, y').format(now);
 //
@@ -17,10 +20,10 @@ class BeginScreen extends ConsumerWidget {
 
   @override
   Widget build(context, WidgetRef ref) {
-    print(MediaQuery.of(context).size.width);
-    print(MediaQuery.of(context).size.height);
+    final topAnnouncements = ref
+        .watch(announcementProvider)
+        .whenData((announcement) => announcement.first.content);
 
-    final announcements = ref.watch(announcementProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text("TEST IT"),
@@ -31,9 +34,11 @@ class BeginScreen extends ConsumerWidget {
           children: [
             const SizedBox(height: 20),
             BoxProp(
-              onPressed: () {},
-              headingText: 'Announcements',
-              contentText: "asdas",
+              onPressed: () {
+                ref.read(indexProvider.notifier).changeIndex(secondPageIndex);
+              },
+              headingText: 'Announcement',
+              contentText: topAnnouncements.value.toString(),
             ),
             const SizedBox(height: 20),
             Row(

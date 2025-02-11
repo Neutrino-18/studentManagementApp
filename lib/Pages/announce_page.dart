@@ -25,7 +25,7 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
           loading: () => const Center(child: CircularProgressIndicator()),
           data: (announcement) => ListView.separated(
             padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 8),
-            itemCount: announcement.length,
+            itemCount: 2,
             itemBuilder: (context, index) {
               return SizedBox(
                 height: 80,

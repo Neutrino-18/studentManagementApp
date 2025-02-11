@@ -1,11 +1,10 @@
 import "package:app_crt/Common/page_footer.dart";
-import 'package:app_crt/Pages/first_page.dart';
 import "package:flutter/material.dart";
-import 'package:app_crt/Pages/interviewer_home.dart';
 import 'package:app_crt/theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   runApp(
@@ -33,7 +32,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 
 
 /*MaterialApp(

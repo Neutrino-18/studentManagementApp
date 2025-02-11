@@ -2,7 +2,6 @@ import 'package:app_crt/Pages/announce_page.dart';
 import 'package:app_crt/Pages/batch_page.dart';
 import 'package:app_crt/Pages/first_page.dart';
 import 'package:app_crt/Pages/profile_page.dart';
-import 'package:app_crt/Providers/announcement_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,7 +22,7 @@ class IconFooterState extends ConsumerState<IconFooter> {
 
   final List<Widget> screens = [
     const BeginScreen(),
-    const ProviderScope(child: SecondScreen()),
+    const SecondScreen(),
     const ThirdScreen(),
     const ProfileScreen(),
   ];
@@ -44,7 +43,7 @@ class IconFooterState extends ConsumerState<IconFooter> {
         currentIndex: _activeScreen,
         onTap: _switchScreen,
         showSelectedLabels: false,
-        showUnselectedLabels: false,
+        showUnselectedLabels: true,
         enableFeedback: false,
         items: [
           BottomNavigationBarItem(
@@ -75,9 +74,3 @@ class IconFooterState extends ConsumerState<IconFooter> {
     );
   }
 }
-
-///
-///
-///
-///
-
