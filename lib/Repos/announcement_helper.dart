@@ -8,14 +8,14 @@ class ApiHelper {
   //     "$_baseURL/schedule/get/flutr/announcements/";
 
   Future<List<Announcement>> fetchAnnouncements() async {
-    print('fetcher reached');
+    // print('fetcher reached');
     try {
       final url = Uri.parse(
           'http://192.168.141.15:8000/schedule/get/flutr/announcements/');
 
       final response = await http.get(url);
-      print(response.statusCode);
-      print(response.body);
+      // print(response.statusCode);
+      // print(response.body);
       if (response.statusCode == 200) {
         final List<dynamic> data = jsonDecode(response.body);
         return data.map((json) => Announcement.fromJson(json)).toList();
@@ -23,7 +23,7 @@ class ApiHelper {
         throw Exception("Failed to load!!");
       }
     } catch (e) {
-      print('Request Failed $e');
+      // print('Request Failed $e');
       return [];
     }
   }

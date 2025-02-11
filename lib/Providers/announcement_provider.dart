@@ -1,5 +1,5 @@
 import 'package:app_crt/Modals/announcements.dart';
-import 'package:app_crt/Repos/db_helper.dart';
+import 'package:app_crt/Repos/announcement_helper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // class AnnouncementNotifier extends StateNotifier<List<Announcement>> {

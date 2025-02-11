@@ -24,7 +24,7 @@ class StudentPerformance extends ConsumerWidget {
         ),
         title: const Text('Performance'),
       ),
-      body: const PerformanceTable(),
+      body: const Text("Kal karenge ab"),
     );
   }
 }
