@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import "package:app_crt/Common/page_footer.dart";
+import 'package:app_crt/Pages/login_page.dart';
 import "package:flutter/material.dart";
 import 'package:app_crt/theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,8 +15,6 @@ void main() async {
       child: MyApp(),
     ),
   );
-  //login("Berna Wilman",
-  //    "pbkdf2_sha256870000f4OYA5IMMtVSjn39wUEIHVc24WQu0YVYsFPWUUaJYS6TKRCE1iZX5QXkJbw/HpEsc=");
 }
 
 class MyApp extends StatelessWidget {
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: selfTheme,
       darkTheme: selfDarkTheme,
 
-      home: const ProviderScope(child: IconFooter()),
+      home: const ProviderScope(child: LoginPage()),
       // routes: {
       //   '/IconFooter': (context) => const InterviewerHome(),
       //   '/InterviewerHome': (context) => const InterviewerHome(),
@@ -40,37 +39,6 @@ class MyApp extends StatelessWidget {
 /*MaterialApp(
 home: IconFooter(key: iconFooterKey),
 );*/
-Future<String> login(String email, String rollno) async {
-  final response = await http.post(
-    Uri.parse("http://192.168.141.15:8000/schedule/login/auth"),
-    headers: {"content-type": "application/json"},
-    body: jsonEncode(
-      {
-        'email': "Berna Wilman",
-        'password':
-            r"pbkdf2_sha256$870000$f4OYA5IMMtVSjn39wUEIHV$c24WQu0YVYsFPWUUaJYS6TKRCE1iZX5QXkJbw/HpEsc="
-      },
-    ),
-  );
-  print(response.statusCode);
-  print(response.body);
-  if (response.statusCode == 201) {
-    final data = jsonDecode(response.body);
-
-    return "";
-  } else {
-    return "";
-  }
-}
-
-
-
-
-
-
-
-
-
 
 
 
