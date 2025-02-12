@@ -20,9 +20,14 @@ class BeginScreen extends ConsumerWidget {
 
   @override
   Widget build(context, WidgetRef ref) {
-    final topAnnouncements = ref
-        .watch(announcementProvider)
-        .whenData((announcement) => announcement.first.content);
+    final topAnnouncements =
+        ref.watch(announcementProvider).whenData((announcement) {
+      if (announcement.isEmpty) {
+        return "Stay updated for the announcement";
+      } else {
+        return announcement.first.content;
+      }
+    });
 
     return Scaffold(
       appBar: AppBar(

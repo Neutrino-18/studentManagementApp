@@ -14,8 +14,8 @@ void main() async {
       child: MyApp(),
     ),
   );
-  login("Berna Wilman",
-      "pbkdf2_sha256870000f4OYA5IMMtVSjn39wUEIHVc24WQu0YVYsFPWUUaJYS6TKRCE1iZX5QXkJbw/HpEsc=");
+  //login("Berna Wilman",
+  //    "pbkdf2_sha256870000f4OYA5IMMtVSjn39wUEIHVc24WQu0YVYsFPWUUaJYS6TKRCE1iZX5QXkJbw/HpEsc=");
 }
 
 class MyApp extends StatelessWidget {
@@ -46,7 +46,7 @@ Future<String> login(String email, String rollno) async {
     headers: {"content-type": "application/json"},
     body: jsonEncode(
       {
-        'username': "Berna Wilman",
+        'email': "Berna Wilman",
         'password':
             r"pbkdf2_sha256$870000$f4OYA5IMMtVSjn39wUEIHV$c24WQu0YVYsFPWUUaJYS6TKRCE1iZX5QXkJbw/HpEsc="
       },

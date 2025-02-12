@@ -23,9 +23,9 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
             child: Text("Error $error"),
           ),
           loading: () => const Center(child: CircularProgressIndicator()),
-          data: (announcement) => ListView.separated(
+          data: (announcements) => ListView.separated(
             padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 8),
-            itemCount: 2,
+            itemCount: announcements.length,
             itemBuilder: (context, index) {
               return SizedBox(
                 height: 80,
@@ -40,7 +40,7 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
                     padding: const EdgeInsets.symmetric(
                         vertical: 12, horizontal: 15),
                     child: Text(
-                      announcement[index].content,
+                      announcements[index].content,
                       style: Theme.of(context).textTheme.titleSmall,
                       // textAlign: TextAlign.center,
                     ),
