@@ -1,19 +1,16 @@
+import 'package:app_crt/Providers/student_data_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // final student = ref.watch(studentDataProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Student Profile'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.edit),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -92,81 +89,6 @@ class ProfileScreen extends StatelessWidget {
                   _buildInfoTile('Credits Completed', '85/120'),
                   _buildInfoTile('Semester', '6th Semester'),
                   _buildInfoTile('Academic Status', 'Regular'),
-                ],
-              ),
-            ),
-
-            // Contact Information
-            Container(
-              margin: const EdgeInsets.only(top: 16),
-              color: Colors.white,
-              child: Column(
-                children: [
-                  _buildSectionHeader('Contact Information'),
-                  _buildInfoTile('Email', 'john.smith@university.edu'),
-                  _buildInfoTile('Phone', '+1 234 567 8900'),
-                  _buildInfoTile('Student ID', '2023CS001'),
-                ],
-              ),
-            ),
-
-            // Current Semester
-            Container(
-              margin: const EdgeInsets.only(top: 16),
-              color: Colors.white,
-              child: Column(
-                children: [
-                  _buildSectionHeader('Current Semester Courses'),
-                  _buildCourseTile(
-                    'CS301',
-                    'Database Management',
-                    'Dr. Sarah Wilson',
-                    'A',
-                  ),
-                  _buildCourseTile(
-                    'CS302',
-                    'Software Engineering',
-                    'Dr. Michael Brown',
-                    'A-',
-                  ),
-                  _buildCourseTile(
-                    'CS303',
-                    'Computer Networks',
-                    'Dr. Robert Davis',
-                    'B+',
-                  ),
-                ],
-              ),
-            ),
-
-            // Quick Actions
-            Container(
-              margin: const EdgeInsets.all(16),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: _buildActionButton(
-                      'Attendance',
-                      Icons.calendar_today,
-                      Colors.green,
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: _buildActionButton(
-                      'Results',
-                      Icons.assessment,
-                      Colors.orange,
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: _buildActionButton(
-                      'Schedule',
-                      Icons.schedule,
-                      Colors.purple,
-                    ),
-                  ),
                 ],
               ),
             ),

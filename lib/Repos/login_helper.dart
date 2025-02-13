@@ -26,7 +26,7 @@ class LoginHelper {
         return LoginState(userId: '');
       }
     } catch (e) {
-      print('Error with login is $e');
+      print('Error with login is: $e');
       return LoginState(userId: '');
     }
   }
