@@ -4,9 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 var kcolorScheme = ColorScheme.fromSeed(
   seedColor: const Color(0xff091235),
 ).copyWith(
-  background: const Color.fromARGB(255, 245, 242, 228),
+  background: const Color.fromARGB(255, 250, 250, 250),
   primary: const Color(0xff2B4257),
-  secondary: const Color(0xff091235),
+  secondary: Colors.blue[800],
   tertiary: const Color.fromARGB(197, 107, 120, 131),
   surface: const Color.fromARGB(255, 245, 242, 228),
 );
@@ -26,6 +26,7 @@ final selfTheme = ThemeData().copyWith(
       elevation: 0),
 
   appBarTheme: const AppBarTheme().copyWith(
+    color: kcolorScheme.background,
     titleTextStyle: GoogleFonts.ubuntuCondensed(
       fontWeight: FontWeight.bold,
       color: kcolorScheme.secondary,

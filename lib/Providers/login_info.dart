@@ -6,23 +6,34 @@ final loginProvider = StateNotifierProvider<LoginDetailsNotifier, LoginState>(
     (ref) => LoginDetailsNotifier());
 
 class LoginDetailsNotifier extends StateNotifier<LoginState> {
-  LoginDetailsNotifier() : super(LoginState(email: '', rollno: ''));
+  LoginDetailsNotifier() : super(LoginState(email: '', rollno: '', role: ''));
 
-  void updateEmail(String email, String rollno) {
+  void updateLogin(String email, String rollno) {
     state = state.copywith(email: email, rollno: rollno);
+  }
+
+  Future<String> loginUser(WidgetRef ref) async {
+    final loginApi = ref.read(loginApiProvider);
+    final userIdAndRole = await loginApi.login(state.email!, state.rollno!);
+
+    if (userIdAndRole.userId!.isNotEmpty && userIdAndRole.role!.isNotEmpty) {
+      state = state.copywith(
+          userId: userIdAndRole.userId, role: userIdAndRole.role);
+      print(userIdAndRole.userId);
+
+      if (userIdAndRole.role == 'student') {
+        return 'student';
+      } else if (userIdAndRole.role == 'tpo') {
+        return 'tpo';
+      } else if (userIdAndRole.role == 'instructor') {
+        return 'instructor';
+      } else {
+        return '';
+      }
+    } else {
+      return '';
+    }
   }
 }
 
 final loginApiProvider = Provider<LoginHelper>((ref) => LoginHelper());
-
-final userIdProvider = FutureProvider<String>((ref) {
-  final login = ref.watch(loginProvider);
-  final email = login.email;
-  final rollno = login.rollno;
-
-  print(email);
-  print(rollno);
-  final loginApi = ref.watch(loginApiProvider);
-
-  return "";
-});

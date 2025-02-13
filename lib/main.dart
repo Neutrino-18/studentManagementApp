@@ -1,11 +1,8 @@
-import 'dart:convert';
-
 import "package:app_crt/Common/page_footer.dart";
 import 'package:app_crt/Pages/login_page.dart';
 import "package:flutter/material.dart";
 import 'package:app_crt/theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:http/http.dart' as http;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,12 +23,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: selfTheme,
       darkTheme: selfDarkTheme,
-
       home: const ProviderScope(child: LoginPage()),
-      // routes: {
-      //   '/IconFooter': (context) => const InterviewerHome(),
-      //   '/InterviewerHome': (context) => const InterviewerHome(),
-      // },
+      routes: {
+        '/studentHome': (context) => const IconFooter(),
+        // '/tpoHome': (context) => const TpoFooter(),
+        // '/instructorHome': (context) => const InstructorHome(),
+      },
     );
   }
 }

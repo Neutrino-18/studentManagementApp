@@ -1,29 +1,310 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
+        title: const Text('Student Profile'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.edit),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          child: const Center(
+        child: Column(
+          children: [
+            // Student Basic Info Card
+            Container(
+              color: Colors.white,
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 40,
+                    backgroundColor: Colors.grey[200],
+                    child: const Text(
+                      'JS',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'John Smith',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'Roll No: CS2023001',
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 14,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.blue[50],
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            'Computer Science - Year 3',
+                            style: TextStyle(
+                              color: Colors.blue[800],
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // Academic Information
+            Container(
+              margin: const EdgeInsets.only(top: 16),
+              color: Colors.white,
+              child: Column(
+                children: [
+                  _buildSectionHeader('Academic Information'),
+                  _buildInfoTile('Current CGPA', '3.8/4.0'),
+                  _buildInfoTile('Credits Completed', '85/120'),
+                  _buildInfoTile('Semester', '6th Semester'),
+                  _buildInfoTile('Academic Status', 'Regular'),
+                ],
+              ),
+            ),
+
+            // Contact Information
+            Container(
+              margin: const EdgeInsets.only(top: 16),
+              color: Colors.white,
+              child: Column(
+                children: [
+                  _buildSectionHeader('Contact Information'),
+                  _buildInfoTile('Email', 'john.smith@university.edu'),
+                  _buildInfoTile('Phone', '+1 234 567 8900'),
+                  _buildInfoTile('Student ID', '2023CS001'),
+                ],
+              ),
+            ),
+
+            // Current Semester
+            Container(
+              margin: const EdgeInsets.only(top: 16),
+              color: Colors.white,
+              child: Column(
+                children: [
+                  _buildSectionHeader('Current Semester Courses'),
+                  _buildCourseTile(
+                    'CS301',
+                    'Database Management',
+                    'Dr. Sarah Wilson',
+                    'A',
+                  ),
+                  _buildCourseTile(
+                    'CS302',
+                    'Software Engineering',
+                    'Dr. Michael Brown',
+                    'A-',
+                  ),
+                  _buildCourseTile(
+                    'CS303',
+                    'Computer Networks',
+                    'Dr. Robert Davis',
+                    'B+',
+                  ),
+                ],
+              ),
+            ),
+
+            // Quick Actions
+            Container(
+              margin: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: _buildActionButton(
+                      'Attendance',
+                      Icons.calendar_today,
+                      Colors.green,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: _buildActionButton(
+                      'Results',
+                      Icons.assessment,
+                      Colors.orange,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: _buildActionButton(
+                      'Schedule',
+                      Icons.schedule,
+                      Colors.purple,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSectionHeader(String title) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: Colors.grey[200]!,
+          ),
+        ),
+      ),
+      child: Row(
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInfoTile(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 12,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label,
+            style: TextStyle(
+              color: Colors.grey[600],
+            ),
+          ),
+          Text(
+            value,
+            style: const TextStyle(
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCourseTile(
+    String code,
+    String name,
+    String instructor,
+    String grade,
+  ) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: Colors.grey[200]!,
+          ),
+        ),
+      ),
+      child: Row(
+        children: [
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 30),
-                SizedBox(
-                  height: 20,
+                Text(
+                  '$code - $name',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  instructor,
+                  style: TextStyle(
+                    color: Colors.grey[600],
+                    fontSize: 14,
+                  ),
                 ),
               ],
             ),
           ),
-        ),
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 6,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.green[50],
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Text(
+              grade,
+              style: TextStyle(
+                color: Colors.green[700],
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildActionButton(String label, IconData icon, Color color) {
+    return ElevatedButton(
+      onPressed: () {},
+      style: ElevatedButton.styleFrom(
+        // primary: color.withOpacity(0.1),
+        // onPrimary: color,
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        elevation: 0,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: const TextStyle(fontSize: 12),
+          ),
+        ],
       ),
     );
   }

@@ -1,27 +1,45 @@
-import 'package:app_crt/Modals/login.dart';
 import 'package:app_crt/Providers/login_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginPage extends ConsumerWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
-    final formKey = GlobalKey<FormState>();
-    final _email = emailController.text;
-    final _rollno = passwordController.text;
+  ConsumerState<LoginPage> createState() {
+    return LoginPageState();
+  }
+}
 
-    void _validateLogin(String email, String rollno) {
-      if (formKey.currentState!.validate()) {
-        formKey.currentState!.save();
+class LoginPageState extends ConsumerState<LoginPage> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
-        ref.watch(loginProvider.notifier).updateEmail(email, rollno);
-      }
+  void _validateLogin(String email, String rollno) async {
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+
+      ref.read(loginProvider.notifier).updateLogin(email, rollno);
     }
 
+    final whatUser = await ref.read(loginProvider.notifier).loginUser(ref);
+
+    if (whatUser == 'student') {
+      Navigator.pushReplacementNamed(context, '/studentHome');
+    } else if (whatUser == 'tpo') {
+      Navigator.pushReplacementNamed(context, '/tpoHome');
+    } else if (whatUser == 'instructor') {
+      Navigator.pushReplacementNamed(context, '/instructorHome');
+    } else {
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Invalid Credentials")));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -105,9 +123,8 @@ class LoginPage extends ConsumerWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        // print(emailController.text);
-                        // print(passwordController.text);
-                        _validateLogin(_email, _rollno);
+                        _validateLogin(
+                            emailController.text, passwordController.text);
                       },
                       child: const Text("Login"),
                     ),
