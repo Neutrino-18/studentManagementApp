@@ -28,9 +28,9 @@ class ProfileScreen extends ConsumerWidget {
                             CircleAvatar(
                               radius: 40,
                               backgroundColor: Colors.grey[200],
-                              child: const Text(
-                                'JS',
-                                style: TextStyle(
+                              child: Text(
+                                '${data.name.characters.first}${data.name.characters.characterAt(7)}',
+                                style: const TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.blue,
@@ -51,7 +51,7 @@ class ProfileScreen extends ConsumerWidget {
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
-                                    'Roll No: ${data.rollno}',
+                                    'RTU Roll No: ${data.rollno}',
                                     style: TextStyle(
                                       color: Colors.grey[600],
                                       fontSize: 14,
@@ -81,25 +81,24 @@ class ProfileScreen extends ConsumerWidget {
                           ],
                         ),
                       ),
-
-                      // Academic Information
                       Container(
                         margin: const EdgeInsets.only(top: 16),
                         color: Colors.white,
                         child: Column(
                           children: [
-                            _buildSectionHeader('Academic Information'),
-                            _buildInfoTile('Current CGPA', '3.8/4.0'),
-                            _buildInfoTile('Credits Completed', '85/120'),
-                            _buildInfoTile('Semester', '6th Semester'),
-                            _buildInfoTile('Academic Status', 'Regular'),
+                            _buildSectionHeader('General Information'),
+                            _buildInfoTile('Email', data.email),
+                            _buildInfoTile('Batch Name', data.batchName),
+                            _buildInfoTile(
+                                'Attendance', data.attendance.toString()),
+                            _buildInfoTile('TPO Name', data.tpoName),
                           ],
                         ),
                       ),
                     ],
                   ),
                 )
-              : const Text("No Info Available"),
+              : const Text("Servers are busy!!"),
           loading: () => const CircularProgressIndicator(),
           error: (error, stackTrace) => Text("Error:$error"),
         ),

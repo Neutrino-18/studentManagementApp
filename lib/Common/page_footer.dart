@@ -1,8 +1,8 @@
-import 'package:app_crt/Pages/announce_page.dart';
-import 'package:app_crt/Pages/batch_page.dart';
-import 'package:app_crt/Pages/first_page.dart';
-import 'package:app_crt/Pages/performance_page.dart';
-import 'package:app_crt/Pages/profile_page.dart';
+import 'package:app_crt/Student%20Screens/announce_page.dart';
+import 'package:app_crt/Student%20Screens/batch_page.dart';
+import 'package:app_crt/Student%20Screens/first_page.dart';
+import 'package:app_crt/Student%20Screens/performance_page.dart';
+import 'package:app_crt/Student%20Screens/profile_page.dart';
 import 'package:app_crt/Providers/index_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

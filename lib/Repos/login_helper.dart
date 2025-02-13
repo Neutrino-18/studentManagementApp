@@ -14,13 +14,15 @@ class LoginHelper {
           {"email": email, "password": rollno},
         ),
       );
-      // print(response.statusCode);
-      // print(response.body);
+      print(email);
+
+      print('THE RESPONSE IS : ${response.body}');
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
-        // print(data);
+        print(data);
         final filteredData = LoginState.fromJson(data);
-        // print(filteredData);
+
+        print('The userID is : ${filteredData.userId}');
         return filteredData;
       } else {
         return LoginState(userId: '');
