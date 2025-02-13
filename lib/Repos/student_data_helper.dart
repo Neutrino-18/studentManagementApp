@@ -4,10 +4,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class StudentHelper {
-  // static const String _baseURL = "http://127.0.0.1:8000";
-  // static const String _announcement =
-  //     "$_baseURL/schedule/get/flutr/announcements/";
-
   Future<StudentModel?> fetchAnnouncements(String? studentId) async {
     try {
       final url = Uri.parse(
@@ -17,12 +13,14 @@ class StudentHelper {
       print(response.statusCode);
       print(response.body);
       if (response.statusCode == 200) {
-        return StudentModel.fromJson(jsonDecode(response.body));
+        final data = StudentModel.fromJson(jsonDecode(response.body));
+        print('STUDENT DATA IS : $data');
+        return data;
       } else {
         throw Exception("Failed to load User Data!!");
       }
     } catch (e) {
-      print('Request Failed $e');
+      print('Request Failed the error is : $e');
       return null;
     }
   }

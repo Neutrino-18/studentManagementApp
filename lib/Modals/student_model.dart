@@ -1,41 +1,36 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+class StudentModel {
+  StudentModel({
+    required this.name,
+    required this.email,
+    required this.rollno,
+    required this.branch,
+    required this.batchName,
+    required this.attendance,
+    required this.score,
+    required this.tpoName,
+    required this.phase,
+  });
 
-part 'student_model.freezed.dart';
-part 'student_model.g.dart';
+  final String name;
+  final String email;
+  final String rollno;
+  final String branch;
+  final String batchName;
+  final int attendance;
+  final int score;
+  final String tpoName;
+  final int phase;
 
-@freezed
-class StudentModel with _$StudentModel {
-  factory StudentModel({
-    required String student,
-    required String stuName,
-    required String stuEmail,
-    required String rtuRollNo,
-    required String branch,
-    required int attendance,
-    required int score,
-    required String tpoName,
-    required int phase,
-    required List<PerformanceData> techPerformanceData,
-    required List<PerformanceData> hrPerformanceData,
-    required List<PerformanceData> gdPerformanceData,
-  }) = _StudentModel;
-
-  factory StudentModel.fromJson(Map<String, dynamic> json) =>
-      _$StudentModelFromJson(json);
-}
-
-@freezed
-class PerformanceData with _$PerformanceData {
-  factory PerformanceData({
-    // required int id,
-    // required int student,
-    String? interviewer,
-    String? date,
-    String? round,
-    String? remark,
-    int? score,
-  }) = _PerformanceData;
-
-  factory PerformanceData.fromJson(Map<String, dynamic> json) =>
-      _$PerformanceDataFromJson(json);
+  factory StudentModel.fromJson(Map<String, dynamic> json) {
+    return StudentModel(
+        name: json['stu_name'],
+        email: json['stu_email'],
+        rollno: json['rtu_roll_no'],
+        branch: json['branch'],
+        batchName: json['batch_name'],
+        attendance: json['attendance'],
+        score: json['score'],
+        tpoName: json['tpo_name'],
+        phase: json['phase']);
+  }
 }

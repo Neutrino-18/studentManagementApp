@@ -40,13 +40,14 @@ class BoxProp extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              color: Theme.of(context).colorScheme.tertiary,
+              color: Theme.of(context).colorScheme.secondary,
               padding: const EdgeInsets.all(10),
               child: Text(
                 contentText,
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    fontWeight: FontWeight.w500,
                     fontSize: 15,
-                    color: Theme.of(context).colorScheme.background),
+                    color: Theme.of(context).colorScheme.onBackground),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),

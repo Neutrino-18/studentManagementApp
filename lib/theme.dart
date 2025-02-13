@@ -5,8 +5,8 @@ var kcolorScheme = ColorScheme.fromSeed(
   seedColor: const Color(0xff091235),
 ).copyWith(
   background: const Color.fromARGB(255, 250, 250, 250),
-  primary: const Color(0xff2B4257),
-  secondary: Colors.blue[800],
+  primary: Colors.blue[800],
+  secondary: Colors.grey[200],
   tertiary: const Color.fromARGB(197, 107, 120, 131),
   surface: const Color.fromARGB(255, 245, 242, 228),
 );
@@ -26,10 +26,10 @@ final selfTheme = ThemeData().copyWith(
       elevation: 0),
 
   appBarTheme: const AppBarTheme().copyWith(
-    color: kcolorScheme.background,
+    color: kcolorScheme.primary,
     titleTextStyle: GoogleFonts.ubuntuCondensed(
       fontWeight: FontWeight.bold,
-      color: kcolorScheme.secondary,
+      color: kcolorScheme.surface,
       fontSize: 35,
     ),
   ),

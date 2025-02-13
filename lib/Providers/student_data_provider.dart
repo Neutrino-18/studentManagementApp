@@ -17,6 +17,7 @@ class StudentNotifier extends AsyncNotifier<StudentModel?> {
       final student = await StudentHelper().fetchAnnouncements(studentId);
 
       state = AsyncData(student!);
+      print('state is $state');
       return student;
     } catch (e) {
       state = AsyncError(e, StackTrace.current);
