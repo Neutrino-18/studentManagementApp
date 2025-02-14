@@ -1,3 +1,4 @@
+import 'package:app_crt/Widgets/TPOWids/tpo_home_button.dart';
 import 'package:flutter/material.dart';
 
 class TPOHomeScreen extends StatelessWidget {
@@ -12,83 +13,16 @@ class TPOHomeScreen extends StatelessWidget {
         ),
         elevation: 0,
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                backgroundColor: Colors.purple,
-                elevation: 8,
-                shadowColor: Colors.purple.withOpacity(0.5),
-              ),
-              child: const Text(
-                'Explore',
-                style: TextStyle(fontSize: 20, letterSpacing: 1.2),
-              ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                backgroundColor: Colors.blue,
-                elevation: 8,
-                shadowColor: Colors.blue.withOpacity(0.5),
-              ),
-              child: const Text(
-                'Create',
-                style: TextStyle(fontSize: 20, letterSpacing: 1.2),
-              ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                backgroundColor: Colors.deepPurple,
-                elevation: 8,
-                shadowColor: Colors.deepPurple.withOpacity(0.5),
-              ),
-              child: const Text(
-                'Profile',
-                style: TextStyle(fontSize: 20, letterSpacing: 1.2),
-              ),
-            ),
+            TPOHomeBut(text: 'Attendance'),
+            SizedBox(height: 20),
+            TPOHomeBut(text: 'Marks'),
+            SizedBox(height: 20),
+            TPOHomeBut(text: 'Announcement'),
           ],
-        ),
-      ),
-      floatingActionButton: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.purple.withOpacity(0.3),
-              spreadRadius: 2,
-              blurRadius: 10,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
-        child: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: Colors.purple,
-          elevation: 8,
-          child: const Icon(Icons.add, size: 28),
         ),
       ),
     );
