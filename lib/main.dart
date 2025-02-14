@@ -24,10 +24,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: selfTheme,
       darkTheme: selfDarkTheme,
-      home: const ProviderScope(child: TPOHomeScreen()),
+      home: const ProviderScope(child: LoginPage()),
       routes: {
-        '/studentHome': (context) => const IconFooter(),
-        // '/tpoHome': (context) => const TpoFooter(),
+        '/studentHome': (context) => IconFooter(),
+        '/tpoHome': (context) => IconFooter(),
         // '/instructorHome': (context) => const InstructorHome(),
       },
     );

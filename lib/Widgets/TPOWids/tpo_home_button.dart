@@ -1,14 +1,19 @@
+import 'package:app_crt/Providers/index_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class TPOHomeBut extends StatelessWidget {
-  const TPOHomeBut({super.key, required this.text});
+class TPOHomeBut extends ConsumerWidget {
+  const TPOHomeBut({super.key, required this.text, required this.onTap});
 
   final String text;
+  final int onTap;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        ref.read(indexProvider.notifier).state = onTap;
+      },
       child: Container(
         width: 270,
         height: 50,
@@ -28,20 +33,3 @@ class TPOHomeBut extends StatelessWidget {
     );
   }
 }
-// ElevatedButton(
-//               onPressed: () {},
-//               style: ElevatedButton.styleFrom(
-//                 padding:
-//                     const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-//                 shape: RoundedRectangleBorder(
-//                   borderRadius: BorderRadius.circular(30),
-//                 ),
-//                 backgroundColor: Colors.purple,
-//                 elevation: 8,
-//                 shadowColor: Colors.purple.withOpacity(0.5),
-//               ),
-//               child: const Text(
-//                 'Explore',
-//                 style: TextStyle(fontSize: 20, letterSpacing: 1.2),
-//               ),
-//             ),

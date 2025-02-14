@@ -2,16 +2,11 @@ import "package:app_crt/Providers/announcement_provider.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
-class SecondScreen extends ConsumerStatefulWidget {
+class SecondScreen extends ConsumerWidget {
   const SecondScreen({super.key});
 
   @override
-  ConsumerState<SecondScreen> createState() => _SecondScreenState();
-}
-
-class _SecondScreenState extends ConsumerState<SecondScreen> {
-  @override
-  Widget build(context) {
+  Widget build(context, WidgetRef ref) {
     final announcements = ref.watch(announcementProvider);
     final tileColor = Theme.of(context).colorScheme.primary;
     return Scaffold(
