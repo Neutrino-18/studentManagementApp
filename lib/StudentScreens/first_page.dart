@@ -1,4 +1,5 @@
-import "package:app_crt/Common/box_prop.dart";
+import "package:app_crt/Common/Constants/indexes.dart";
+import "package:app_crt/Common/Widgets/box_prop.dart";
 import "package:app_crt/Extra/scrollable_box.dart";
 import "package:app_crt/Providers/announcement_provider.dart";
 import "package:app_crt/Providers/index_provider.dart";
@@ -9,8 +10,6 @@ import 'package:intl/intl.dart';
 //
 //
 //
-const announcementPageIndex = 1;
-const batchPageIndex = 2;
 final now = DateTime.now();
 String formattedDate = DateFormat('MMMM d, y').format(now);
 //
@@ -40,7 +39,8 @@ class BeginScreen extends ConsumerWidget {
             const SizedBox(height: 20),
             BoxProp(
               onPressed: () {
-                ref.read(indexProvider.notifier).state = announcementPageIndex;
+                ref.read(indexProvider.notifier).state =
+                    ConstIndex.announcementIndex;
               },
               headingText: 'Announcement',
               contentText: topAnnouncements.value != null
@@ -67,7 +67,7 @@ class BeginScreen extends ConsumerWidget {
             const SizedBox(height: 20),
             BoxProp(
               onPressed: () {
-                ref.read(indexProvider.notifier).state = batchPageIndex;
+                ref.read(indexProvider.notifier).state = ConstIndex.batchIndex;
               },
               headingText: 'Batch Msg',
               contentText:
