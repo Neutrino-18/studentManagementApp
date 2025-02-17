@@ -10,11 +10,6 @@ const String techTableTitle = "Tech Performance";
 class StudentPerformance extends ConsumerWidget {
   const StudentPerformance({super.key});
 
-  // final List<HRPerformance> _hrPerformance = [
-  //   HRPerformance(phase: 1, score: 10, date: "2025/01/26", remark: "V.good"),
-  //   HRPerformance(phase: 1, score: 8, date: "2025/01/25", remark: "Good")
-  // ];
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(

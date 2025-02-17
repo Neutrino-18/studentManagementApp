@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: selfTheme,
       darkTheme: selfDarkTheme,
-      home: ProviderScope(child: IconFooter()),
+      home: const ProviderScope(child: LoginPage()),
       routes: {
         '/studentHome': (context) => IconFooter(),
         '/tpoHome': (context) => IconFooter(),
