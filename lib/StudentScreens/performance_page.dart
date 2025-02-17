@@ -1,4 +1,5 @@
 import 'package:app_crt/Providers/index_provider.dart';
+import 'package:app_crt/Providers/student_data_provider.dart';
 import 'package:app_crt/Widgets/StudentWids/performance_table.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,37 +13,57 @@ class StudentPerformance extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final studentPerformance = ref.watch(studentDataProvider);
+
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            ref.read(indexProvider.notifier).state = 0;
-          },
-          icon: const Icon(Icons.arrow_back_ios_rounded),
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              ref.read(indexProvider.notifier).state = 0;
+            },
+            icon: const Icon(Icons.arrow_back_ios_rounded),
+          ),
+          title: const Text('Performance'),
         ),
-        title: const Text('Performance'),
-      ),
-      body: const SingleChildScrollView(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 20),
-            SizedBox(height: 20),
-            DropdownTableWidget(
-              dropDownTitle: hrTableTitle,
-              index: 0,
+        body: studentPerformance.when(
+          data: (studentData) => SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(height: 20),
+                Card(
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Overall Performane',
+                      style: Theme.of(context).textTheme.titleMedium,
+                      children: const [
+                        TextSpan(text: 'Student '),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                DropdownTableWidget(
+                  dropDownTitle: hrTableTitle,
+                  tableData: studentData!.hrPerform,
+                  index: 0,
+                ),
+                DropdownTableWidget(
+                  tableData: studentData.gdPerform,
+                  dropDownTitle: gdTableTitle,
+                  index: 1,
+                ),
+                DropdownTableWidget(
+                  tableData: studentData.techPerform,
+                  dropDownTitle: techTableTitle,
+                  index: 2,
+                ),
+              ],
             ),
-            DropdownTableWidget(
-              dropDownTitle: gdTableTitle,
-              index: 1,
-            ),
-            DropdownTableWidget(
-              dropDownTitle: techTableTitle,
-              index: 2,
-            ),
-          ],
-        ),
-      ),
-    );
+          ),
+          error: (error, stackTrace) => const Center(
+            child: Text("Servers are busy"),
+          ),
+          loading: () => const CircularProgressIndicator(),
+        ));
   }
 }

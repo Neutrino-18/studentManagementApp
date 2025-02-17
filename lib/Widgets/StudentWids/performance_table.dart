@@ -1,27 +1,18 @@
+import 'package:app_crt/Modals/student_model.dart';
 import 'package:app_crt/Providers/toggle_performance_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class TableData {
-  final int phase;
-  final double score;
-  final String date;
-  final String remarks;
-
-  TableData({
-    required this.phase,
-    required this.score,
-    required this.date,
-    required this.remarks,
-  });
-}
-
 class DropdownTableWidget extends ConsumerWidget {
   const DropdownTableWidget(
-      {super.key, required this.dropDownTitle, required this.index});
+      {super.key,
+      required this.dropDownTitle,
+      required this.index,
+      required this.tableData});
 
   final String dropDownTitle;
   final int index;
+  final List<PerformanceData> tableData;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -60,7 +51,9 @@ class DropdownTableWidget extends ConsumerWidget {
           if (isToggled)
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: DataTableData(),
+              child: DataTableData(
+                tableData: tableData,
+              ),
             ),
         ],
       ),
@@ -69,36 +62,13 @@ class DropdownTableWidget extends ConsumerWidget {
 }
 
 class DataTableData extends StatelessWidget {
-  DataTableData({
-    super.key,
-  });
-
-  final List<TableData> tableData = [
-    TableData(
-      phase: 1,
-      score: 7,
-      date: '2024-03-15',
-      remarks: 'Excellent progress',
-    ),
-    TableData(
-      phase: 2,
-      score: 9,
-      date: '2024-03-16',
-      remarks: 'Outstanding performance',
-    ),
-    TableData(
-      phase: 3,
-      score: 6,
-      date: '2024-03-17',
-      remarks: 'Good work',
-    ),
-  ];
-
+  const DataTableData({super.key, required this.tableData});
+  final List<PerformanceData> tableData;
   @override
   Widget build(BuildContext context) {
     return DataTable(
       columns: [
-        dataColumn(context, "Phase"),
+        dataColumn(context, "Round"),
         dataColumn(context, "Score"),
         dataColumn(context, "Date"),
         dataColumn(context, "Remarks"),
@@ -106,10 +76,10 @@ class DataTableData extends StatelessWidget {
       rows: tableData.map((data) {
         return DataRow(
           cells: [
-            DataCell(Text(data.phase.toString())),
-            DataCell(Text(data.score.toStringAsFixed(1))),
-            DataCell(Text(data.date)),
-            DataCell(Text(data.remarks)),
+            DataCell(Text(tableData.first.round)),
+            DataCell(Text(tableData.first.score.toString())),
+            DataCell(Text(tableData.first.date)),
+            DataCell(Text(tableData.first.remark)),
           ],
         );
       }).toList(),
