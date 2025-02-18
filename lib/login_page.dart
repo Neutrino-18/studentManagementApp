@@ -55,6 +55,7 @@ class LoginPageState extends ConsumerState<LoginPage> {
         ),
         child: Center(
           child: Card(
+            color: Theme.of(context).colorScheme.background,
             elevation: 8,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(22.69),
@@ -123,11 +124,18 @@ class LoginPageState extends ConsumerState<LoginPage> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(
+                              Theme.of(context).colorScheme.background)),
                       onPressed: () {
                         _validateLogin(emailController.text.trimRight(),
                             passwordController.text.trimRight());
                       },
-                      child: const Text("Login"),
+                      child: Text(
+                        "Login",
+                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                            color: Theme.of(context).colorScheme.onBackground),
+                      ),
                     ),
                   ),
                 ],
