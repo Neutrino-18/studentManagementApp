@@ -1,3 +1,4 @@
+import 'package:app_crt/Common/Constants/names.dart';
 import 'package:app_crt/Providers/login_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,16 +27,23 @@ class LoginPageState extends ConsumerState<LoginPage> {
     final whatUser = await ref.read(loginProvider.notifier).loginUser(ref);
 
     if (!context.mounted) return;
-    if (whatUser == 'student') {
-      Navigator.pushReplacementNamed(context, '/studentHome');
-    } else if (whatUser == 'tpo') {
-      Navigator.pushReplacementNamed(context, '/tpoHome');
-    } else if (whatUser == 'instructor') {
-      Navigator.pushReplacementNamed(context, '/instructorHome');
-    } else {
-      ScaffoldMessenger.of(context).clearSnackBars();
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Invalid Credentials")));
+
+    switch (whatUser) {
+      case Navigation.student:
+        Navigator.pushReplacementNamed(context, Destination.studentHome);
+        break;
+      case Navigation.tpo:
+        Navigator.pushReplacementNamed(context, Destination.tpoHome);
+        break;
+      case Navigation.instructor:
+        Navigator.pushReplacementNamed(context, Destination.instructorHome);
+        break;
+
+      default:
+        ScaffoldMessenger.of(context).clearSnackBars();
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("Invalid Credentials")));
+        break;
     }
   }
 
