@@ -25,6 +25,7 @@ class LoginPageState extends ConsumerState<LoginPage> {
 
     final whatUser = await ref.read(loginProvider.notifier).loginUser(ref);
 
+    if (!context.mounted) return;
     if (whatUser == 'student') {
       Navigator.pushReplacementNamed(context, '/studentHome');
     } else if (whatUser == 'tpo') {
@@ -123,8 +124,8 @@ class LoginPageState extends ConsumerState<LoginPage> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        _validateLogin(
-                            emailController.text, passwordController.text);
+                        _validateLogin(emailController.text.trimRight(),
+                            passwordController.text.trimRight());
                       },
                       child: const Text("Login"),
                     ),

@@ -18,14 +18,14 @@ class SecondScreen extends ConsumerWidget {
             child: Text("Error $error"),
           ),
           loading: () => const Center(child: CircularProgressIndicator()),
-          data: (announcements) => ListView.separated(
+          data: (announcements) => ListView.builder(
             padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 8),
             itemCount: announcements.length,
             itemBuilder: (context, index) {
               return SizedBox(
-                height: 80,
                 width: double.infinity,
                 child: Card(
+                  margin: const EdgeInsets.symmetric(vertical: 15),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8)),
                   clipBehavior: Clip.hardEdge,
@@ -37,13 +37,13 @@ class SecondScreen extends ConsumerWidget {
                     child: Text(
                       announcements[index].content,
                       style: Theme.of(context).textTheme.titleSmall,
+
                       // textAlign: TextAlign.center,
                     ),
                   ),
                 ),
               );
             },
-            separatorBuilder: (context, index) => const SizedBox(height: 20),
           ),
         ));
   }

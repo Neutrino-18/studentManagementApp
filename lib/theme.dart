@@ -7,7 +7,7 @@ var kcolorScheme = ColorScheme.fromSeed(
   background: const Color.fromARGB(255, 250, 250, 250),
   primary: Colors.blue[800],
   secondary: Colors.grey[200],
-  tertiary: const Color.fromARGB(197, 107, 120, 131),
+  tertiary: const Color.fromARGB(197, 0, 140, 255),
   surface: const Color.fromARGB(255, 245, 242, 228),
 );
 

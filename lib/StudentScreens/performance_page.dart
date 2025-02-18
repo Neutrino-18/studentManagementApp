@@ -1,8 +1,12 @@
+import 'package:app_crt/Modals/student_model.dart';
 import 'package:app_crt/Providers/index_provider.dart';
 import 'package:app_crt/Providers/student_data_provider.dart';
 import 'package:app_crt/Widgets/StudentWids/performance_table.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+const List<PerformanceData> ifEmpty = [];
 
 const String hrTableTitle = "HR Performance";
 const String gdTableTitle = "GD Performance";
@@ -13,7 +17,7 @@ class StudentPerformance extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final studentPerformance = ref.watch(studentDataProvider);
+    final asyncStudentData = ref.watch(studentDataProvider);
 
     return Scaffold(
         appBar: AppBar(
@@ -25,39 +29,62 @@ class StudentPerformance extends ConsumerWidget {
           ),
           title: const Text('Performance'),
         ),
-        body: studentPerformance.when(
+        body: asyncStudentData.when(
           data: (studentData) => SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: 20),
-                Card(
-                  child: RichText(
-                    text: TextSpan(
-                      text: 'Overall Performane',
-                      style: Theme.of(context).textTheme.titleMedium,
-                      children: const [
-                        TextSpan(text: 'Student '),
-                      ],
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  const SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Container(
+                      height: 150,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 154, 191, 233),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          buildAlignedText("Roll no:", studentData!.rollno),
+                          buildAlignedText(
+                              "Batch Name:", studentData.batchName),
+                          buildAlignedText(
+                              "Score:", studentData.score.toString()),
+                          buildAlignedText("HR Interviewer:",
+                              studentData.hrPerform.first.interviewer),
+                          buildAlignedText(
+                              "Phase:", studentData.phase.toString()),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 20),
-                DropdownTableWidget(
-                  dropDownTitle: hrTableTitle,
-                  tableData: studentData!.hrPerform,
-                  index: 0,
-                ),
-                DropdownTableWidget(
-                  tableData: studentData.gdPerform,
-                  dropDownTitle: gdTableTitle,
-                  index: 1,
-                ),
-                DropdownTableWidget(
-                  tableData: studentData.techPerform,
-                  dropDownTitle: techTableTitle,
-                  index: 2,
-                ),
-              ],
+                  const SizedBox(height: 20),
+                  DropdownTableWidget(
+                    dropDownTitle: hrTableTitle,
+                    tableData: studentData.hrPerform.isEmpty
+                        ? ifEmpty
+                        : studentData.hrPerform,
+                    index: 0,
+                  ),
+                  DropdownTableWidget(
+                    tableData: studentData.gdPerform.isEmpty
+                        ? ifEmpty
+                        : studentData.gdPerform,
+                    dropDownTitle: gdTableTitle,
+                    index: 1,
+                  ),
+                  DropdownTableWidget(
+                    tableData: studentData.techPerform.isEmpty
+                        ? ifEmpty
+                        : studentData.techPerform,
+                    dropDownTitle: techTableTitle,
+                    index: 2,
+                  ),
+                ],
+              ),
             ),
           ),
           error: (error, stackTrace) => const Center(
@@ -65,5 +92,29 @@ class StudentPerformance extends ConsumerWidget {
           ),
           loading: () => const CircularProgressIndicator(),
         ));
+  }
+
+  Widget buildAlignedText(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 120,
+            child: Text(
+              label,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              style: TextStyle(color: Colors.black87),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
