@@ -21,7 +21,7 @@ class DropdownTableWidget extends ConsumerWidget {
       margin: const EdgeInsets.all(16.0),
       elevation: 4,
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        // mainAxisSize: MainAxisSize.min,
         children: [
           InkWell(
             onTap: () {
