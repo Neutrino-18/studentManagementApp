@@ -1,3 +1,5 @@
+import "dart:math";
+
 import "package:app_crt/Common/Constants/names.dart";
 import "package:app_crt/Modals/announcements.dart";
 import "package:app_crt/Providers/announcement_provider.dart";
@@ -12,16 +14,25 @@ class SecondScreen extends ConsumerStatefulWidget {
   ConsumerState<SecondScreen> createState() => _SecondScreenState();
 }
 
-class _SecondScreenState extends ConsumerState<SecondScreen> {
+class _SecondScreenState extends ConsumerState<SecondScreen>
+    with AutomaticKeepAliveClientMixin {
   AsyncValue<List<Announcement>> _announcements = const AsyncValue.data([]);
   final _newAnnouncement = TextEditingController();
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   void initState() {
+    debugPrint('init called');
+
     super.initState();
     Future.microtask(() async {
+      print('initiated');
       final announcements = await ref.read(announcementProvider.future);
+      print('fetched');
       setState(() {
+        print('entered the set state');
         _announcements = AsyncValue.data(announcements);
       });
     });
@@ -29,6 +40,7 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
 
   @override
   Widget build(context) {
+    super.build(context);
     final tileColor = Theme.of(context).colorScheme.primary;
     return Scaffold(
       appBar: AppBar(

@@ -4,6 +4,11 @@ import 'package:app_crt/Common/Constants/screens.dart';
 import 'package:app_crt/Modals/login.dart';
 import 'package:app_crt/Providers/login_info.dart';
 import 'package:app_crt/Providers/index_provider.dart';
+import 'package:app_crt/StudentScreens/announce_page.dart';
+import 'package:app_crt/StudentScreens/batch_page.dart';
+import 'package:app_crt/TPOInstructorInterviewer/TPO/tpo_home.dart';
+import 'package:app_crt/TPOInstructorInterviewer/attendance_screen.dart';
+import 'package:app_crt/TPOInstructorInterviewer/marks_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,15 +20,15 @@ class IconFooter extends ConsumerStatefulWidget {
 }
 
 class _IconFooterState extends ConsumerState<IconFooter> {
-  LoginState? _loginDetails;
-  @override
-  void initState() {
-    super.initState();
-    final loginDetails = ref.read(loginProvider);
-//setState(() {
-    _loginDetails = loginDetails;
-    // });
-  }
+  //LoginState? _loginDetails;
+  // @override
+//   void initState() {
+//     super.initState();
+//     final loginDetails = ref.read(loginProvider);
+// //setState(() {
+//     _loginDetails = loginDetails;
+//     // });
+//   }
 
   List<Widget> _screens = [];
   List<BottomNavigationBarItem> _items = [];
@@ -32,11 +37,12 @@ class _IconFooterState extends ConsumerState<IconFooter> {
   @override
   Widget build(BuildContext context) {
     final tabIndex = ref.watch(indexProvider);
-
+    print('Something was rebuild');
+    final loginDetails = ref.watch(loginProvider);
     print("Tab Index is $tabIndex");
 
-    if (_loginDetails!.role == Navigation.tpo ||
-        _loginDetails!.role == Navigation.editor) {
+    if (loginDetails.role == Navigation.tpo ||
+        loginDetails.role == Navigation.editor) {
       _screens = tpoScreens;
       _items = tpoItems;
       _currentIndex = tabIndex > ConstIndex.batchIndex ? 0 : tabIndex;
@@ -48,7 +54,10 @@ class _IconFooterState extends ConsumerState<IconFooter> {
     }
 
     return Scaffold(
-      body: _screens[tabIndex],
+      body: IndexedStack(
+        index: tabIndex,
+        children: _screens,
+      ),
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.shifting,
           currentIndex: _currentIndex,
