@@ -17,34 +17,21 @@ class LoginPageState extends ConsumerState<LoginPage> {
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
-  void _validateLogin(String email, String rollno) async {
+  void _validateLogin(String email, String rollno) {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
 
       ref.read(loginProvider.notifier).updateLogin(email, rollno);
     }
 
-    final whatUser = await ref.read(loginProvider.notifier).loginUser(ref);
+    ref.read(loginProvider.notifier).loginUser(ref, context);
+  }
 
-    if (!context.mounted) return;
-
-    switch (whatUser) {
-      case Navigation.student:
-        Navigator.pushReplacementNamed(context, Destination.studentHome);
-        break;
-      case Navigation.tpo:
-        Navigator.pushReplacementNamed(context, Destination.tpoHome);
-        break;
-      case Navigation.instructor:
-        Navigator.pushReplacementNamed(context, Destination.instructorHome);
-        break;
-
-      default:
-        ScaffoldMessenger.of(context).clearSnackBars();
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("Invalid Credentials")));
-        break;
-    }
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 
   @override

@@ -1,5 +1,7 @@
+import 'package:app_crt/Common/Constants/names.dart';
 import 'package:app_crt/Modals/login.dart';
 import 'package:app_crt/Repos/login_helper.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final loginProvider = StateNotifierProvider<LoginDetailsNotifier, LoginState>(
@@ -12,7 +14,7 @@ class LoginDetailsNotifier extends StateNotifier<LoginState> {
     state = state.copywith(email: email, rollno: rollno);
   }
 
-  Future<String> loginUser(WidgetRef ref) async {
+  void loginUser(WidgetRef ref, BuildContext context) async {
     final loginApi = ref.read(loginApiProvider);
     final userIdAndRole = await loginApi.login(state.email!, state.rollno!);
 
@@ -21,17 +23,30 @@ class LoginDetailsNotifier extends StateNotifier<LoginState> {
           userId: userIdAndRole.userId, role: userIdAndRole.role);
       print(userIdAndRole.userId);
 
-      if (userIdAndRole.role == 'student') {
-        return 'student';
-      } else if (userIdAndRole.role == 'tpo') {
-        return 'tpo';
-      } else if (userIdAndRole.role == 'instructor') {
-        return 'instructor';
-      } else {
-        return '';
+      switch (userIdAndRole.role) {
+        case Navigation.student:
+          Navigator.pushReplacementNamed(context, Destination.studentHome);
+          break;
+        case Navigation.tpo:
+          Navigator.pushReplacementNamed(context, Destination.tpoHome);
+          break;
+        case Navigation.instructor:
+          Navigator.pushReplacementNamed(context, Destination.instructorHome);
+          break;
+        case Navigation.editor:
+          Navigator.pushReplacementNamed(context, Destination.tpoHome);
+          // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          //   content: Text("Editor Dashboard in progress"),
+          //   duration: Duration(seconds: 3),
+          // ));
+          break;
+
+        default:
+          ScaffoldMessenger.of(context).clearSnackBars();
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Invalid Credentials")));
+          break;
       }
-    } else {
-      return '';
     }
   }
 }

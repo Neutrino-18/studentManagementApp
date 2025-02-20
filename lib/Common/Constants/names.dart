@@ -2,6 +2,8 @@ class Navigation {
   static const student = "student";
   static const tpo = "tpo";
   static const instructor = "instructor";
+  static const editor = "editor";
+  static const interviewer = "interviewer";
 }
 
 class Destination {
