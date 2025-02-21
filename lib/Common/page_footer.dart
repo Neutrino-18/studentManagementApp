@@ -40,6 +40,7 @@ class _IconFooterState extends State<IconFooter> {
   Widget build(BuildContext context) {
     print("Kardiya Build ");
     return PopScope(
+      canPop: _historyIndex.length == 1 ? true : false,
       onPopInvoked: (didPop) {
         _onPopInvoked();
       },
