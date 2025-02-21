@@ -8,7 +8,7 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final student = ref.watch(studentDataProvider);
-    print(student.value);
+    print("Watched Profile ${student.value}");
     return Scaffold(
       appBar: AppBar(
         title: const Text('Student Profile'),

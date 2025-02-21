@@ -19,14 +19,14 @@ class BeginScreen extends ConsumerWidget {
 
   @override
   Widget build(context, WidgetRef ref) {
-    final topAnnouncements =
-        ref.watch(announcementProvider).whenData((announcement) {
-      if (announcement.isEmpty) {
-        return "Stay updated for the announcement";
-      } else {
-        return announcement.first.content;
-      }
-    });
+    const topAnnouncements = "abcd";
+    //     ref.watch(announcementProvider).whenData((announcement) {
+    //   if (announcement.isEmpty) {
+    //     return "Stay updated for the announcement";
+    //   } else {
+    //     return announcement.first.content;
+    //   }
+    // });
 
     return Scaffold(
       appBar: AppBar(
@@ -38,15 +38,16 @@ class BeginScreen extends ConsumerWidget {
           children: [
             const SizedBox(height: 20),
             BoxProp(
-              onPressed: () {
-                ref.read(indexProvider.notifier).state =
-                    ConstIndex.announcementIndex;
-              },
-              headingText: 'Announcement',
-              contentText: topAnnouncements.value != null
-                  ? topAnnouncements.value.toString()
-                  : "Connection Issue",
-            ),
+                onPressed: () {
+                  ref.read(indexProvider.notifier).state =
+                      ConstIndex.announcementIndex;
+                },
+                headingText: 'Announcement',
+                contentText: topAnnouncements
+                // .value != null
+                //     ? topAnnouncements.value.toString()
+                //     : "Connection Issue",
+                ),
             const SizedBox(height: 20),
             Row(
               children: [

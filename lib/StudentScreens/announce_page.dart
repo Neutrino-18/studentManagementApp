@@ -24,7 +24,7 @@ class _SecondScreenState extends ConsumerState<SecondScreen>
 
   @override
   void initState() {
-    debugPrint('init called');
+    debugPrint('announcement initiation called');
 
     super.initState();
     Future.microtask(() async {

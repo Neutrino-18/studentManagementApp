@@ -9,11 +9,11 @@ class StudentHelper {
           'http://192.168.141.15:8000/schedule/get/flutr/student/"$studentId"');
 
       final response = await http.get(url);
-      print(response.statusCode);
-      print(response.body);
+      // print(response.statusCode);
+      // print(response.body);
       if (response.statusCode == 200) {
         final data = StudentModel.fromJson(jsonDecode(response.body));
-        print('STUDENT DATA IS : $data');
+        // print('STUDENT DATA IS : $data');
         return data;
       } else {
         throw Exception("Failed to load User Data!!");

@@ -41,7 +41,7 @@ class AnnouncementHelper {
         ),
       );
 
-      print("The Response contains : ${response.body}");
+      // print("The Response contains : ${response.body}");
     } catch (e) {
       print("The error with posting announcement is $e");
     }
