@@ -1,17 +1,13 @@
+import 'package:app_crt/Common/Constants/api.dart';
 import 'package:app_crt/Modals/announcements.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class AnnouncementHelper {
-  // static const String _baseURL = "http://127.0.0.1:8000";
-  // static const String _announcement =
-  //     "$_baseURL/schedule/get/flutr/announcements/";
-
   Future<List<Announcement>> fetchAnnouncements() async {
     // print('fetcher reached');
     try {
-      final url = Uri.parse(
-          'http://192.168.141.15:8000/schedule/get/flutr/announcements/');
+      final url = Uri.parse(announcementFetch);
 
       final response = await http.get(url);
       // print(response.statusCode);
@@ -30,8 +26,7 @@ class AnnouncementHelper {
 
   void postAnnouncements(String announcement) async {
     try {
-      final url = Uri.parse(
-          'http://192.168.141.15:8000/schedule/post/flutr/announcement/');
+      final url = Uri.parse(announcementPost);
 
       final response = await http.post(
         url,

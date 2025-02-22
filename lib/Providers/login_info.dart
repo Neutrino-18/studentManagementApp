@@ -20,7 +20,9 @@ class LoginDetailsNotifier extends StateNotifier<LoginState> {
 
     if (userIdAndRole.userId!.isNotEmpty && userIdAndRole.role!.isNotEmpty) {
       state = state.copywith(
-          userId: userIdAndRole.userId, role: userIdAndRole.role);
+          userId: userIdAndRole.userId,
+          role: userIdAndRole.role,
+          isLoggedIn: true);
       print(userIdAndRole.userId);
 
       switch (userIdAndRole.role) {

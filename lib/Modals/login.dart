@@ -4,28 +4,28 @@ class LoginState {
     this.rollno,
     this.role,
     this.userId,
-    // this.isLoggedIn = false
+    this.isLoggedIn = false,
   });
 
   final String? email;
   final String? rollno;
   final String? role;
   final String? userId;
-  // final bool isLoggedIn;
+  final bool isLoggedIn;
 
   LoginState copywith({
     String? email,
     String? rollno,
     String? userId,
     String? role,
-    // bool? isLoggedIn
+    bool isLoggedIn = false,
   }) {
     return LoginState(
       email: email ?? this.email,
       rollno: rollno ?? this.rollno,
       role: role ?? this.role,
       userId: userId ?? this.userId,
-      // isLoggedIn: isLoggedIn ?? this.isLoggedIn,
+      isLoggedIn: isLoggedIn,
     );
   }
 

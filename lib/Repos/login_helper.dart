@@ -1,14 +1,13 @@
+import 'package:app_crt/Common/Constants/api.dart';
 import 'package:app_crt/Modals/login.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class LoginHelper {
-  static const loginURL = "http://192.168.141.15:8000/schedule/login/auth";
-
   Future<LoginState> login(String email, String rollno) async {
     try {
       final response = await http.post(
-        Uri.parse("http://192.168.141.15:8000/schedule/login/auth"),
+        Uri.parse(loginFetch),
         headers: {"content-type": "application/json"},
         body: jsonEncode(
           {"email": email, "password": rollno},

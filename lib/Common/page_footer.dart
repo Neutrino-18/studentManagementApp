@@ -17,6 +17,11 @@ class _IconFooterState extends State<IconFooter> {
   final _items = studentItems;
 
   bool _onPopInvoked() {
+    if (_historyIndex.last == 0) {
+      setState(() {
+        _historyIndex.removeRange(0, _historyIndex.length - 1);
+      });
+    }
     if (_historyIndex.length > 1) {
       setState(() {
         _historyIndex.removeLast();
