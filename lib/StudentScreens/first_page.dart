@@ -1,7 +1,6 @@
 import "package:app_crt/Common/Constants/indexes.dart";
 import "package:app_crt/Common/Widgets/box_prop.dart";
 import "package:app_crt/Extra/scrollable_box.dart";
-import "package:app_crt/Providers/announcement_provider.dart";
 import "package:app_crt/Providers/index_provider.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";

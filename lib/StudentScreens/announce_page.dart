@@ -1,5 +1,3 @@
-import "dart:math";
-
 import "package:app_crt/Common/Constants/names.dart";
 import "package:app_crt/Modals/announcements.dart";
 import "package:app_crt/Providers/announcement_provider.dart";

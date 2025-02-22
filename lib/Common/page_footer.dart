@@ -1,4 +1,3 @@
-import 'package:app_crt/Common/Constants/indexes.dart';
 import 'package:app_crt/Common/Constants/screens.dart';
 import 'package:flutter/material.dart';
 
@@ -19,9 +18,14 @@ class _IconFooterState extends State<IconFooter> {
   bool _onPopInvoked() {
     if (_historyIndex.last == 0) {
       setState(() {
-        _historyIndex.removeRange(0, _historyIndex.length - 1);
+        _historyIndex.replaceRange(0, _historyIndex.length, []);
       });
     }
+    // if (_historyIndex.contains(_currentIndex)) {
+    //   setState(() {
+    //     _historyIndex.removeWhere((index) => index == _currentIndex);
+    //   });
+    // }
     if (_historyIndex.length > 1) {
       setState(() {
         _historyIndex.removeLast();
@@ -66,28 +70,3 @@ class _IconFooterState extends State<IconFooter> {
     );
   }
 }
-// [
-//           BottomNavigationBarItem(
-//             icon: const Icon(
-//               FontAwesomeIcons.house,
-//               size: 20,
-//             ),
-//             label: 'Home',
-//             backgroundColor: backColor,
-//           ),
-//           BottomNavigationBarItem(
-//             icon: const Icon(FeatherIcons.activity),
-//             label: 'Announcements',
-//             backgroundColor: backColor,
-//           ),
-//           BottomNavigationBarItem(
-//             icon: const Icon(FontAwesomeIcons.peopleGroup),
-//             label: 'Batch',
-//             backgroundColor: backColor,
-//           ),
-//           BottomNavigationBarItem(
-//             icon: const Icon(Icons.account_circle),
-//             label: 'Profile',
-//             backgroundColor: backColor,
-//           ),
-//         ],
