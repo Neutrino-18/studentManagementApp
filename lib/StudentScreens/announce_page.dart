@@ -12,39 +12,67 @@ class SecondScreen extends ConsumerStatefulWidget {
   ConsumerState<SecondScreen> createState() => _SecondScreenState();
 }
 
-class _SecondScreenState extends ConsumerState<SecondScreen>
-    with AutomaticKeepAliveClientMixin {
-  AsyncValue<List<Announcement>> _announcements = const AsyncValue.data([]);
+class _SecondScreenState extends ConsumerState<SecondScreen> {
   final _newAnnouncement = TextEditingController();
 
-  @override
-  bool get wantKeepAlive => true;
-
-  @override
-  void initState() {
-    debugPrint('announcement initiation called');
-
-    super.initState();
-    Future.microtask(() async {
-      print('initiated');
-      final announcements = await ref.read(announcementProvider.future);
-      print('fetched');
-      setState(() {
-        print('entered the set state');
-        _announcements = AsyncValue.data(announcements);
-      });
-    });
+  void _validatAnnouncement(String announcement) {
+    final textColor = Theme.of(context).colorScheme.onBackground;
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(
+          "Are you Sure!?",
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge!
+              .copyWith(color: textColor),
+        ),
+        content: Text(
+          "This message cannot be unsent. So please check again",
+          style:
+              Theme.of(context).textTheme.bodyLarge!.copyWith(color: textColor),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text(
+              "Cancel",
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(color: textColor),
+            ),
+          ),
+          ElevatedButton(
+              onPressed: () {
+                ref
+                    .read(announcementProvider.notifier)
+                    .announcementPoster(announcement);
+              },
+              child: Text(
+                "Confirm",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(color: textColor),
+              ))
+        ],
+      ),
+    );
   }
 
   @override
   Widget build(context) {
-    super.build(context);
+    print("Watched Announcements");
+    final announcements = ref.watch(announcementProvider);
     final tileColor = Theme.of(context).colorScheme.primary;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Announcement"),
       ),
-      body: _announcements.when(
+      body: announcements.when(
         error: (error, stackTrace) => Center(
           child: Text("Error $error"),
         ),
@@ -93,20 +121,18 @@ class _SecondScreenState extends ConsumerState<SecondScreen>
                 TextField(
                   controller: _newAnnouncement,
                   keyboardType: TextInputType.text,
+                  onSubmitted: _validatAnnouncement,
                   decoration: InputDecoration(
-                      label: Text(
-                        "Announce Something",
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .copyWith(
-                                color:
-                                    Theme.of(context).colorScheme.onBackground),
-                      ),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color:
-                                  Theme.of(context).colorScheme.onBackground))),
+                    label: Text(
+                      "Announce Something",
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.onBackground),
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.onBackground),
+                    ),
+                  ),
                 )
             ],
           ),

@@ -20,6 +20,9 @@ final selfTheme = ThemeData().copyWith(
   iconButtonTheme: IconButtonThemeData(
     style: const ButtonStyle().copyWith(),
   ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+      style: const ButtonStyle().copyWith(
+          backgroundColor: MaterialStatePropertyAll(kcolorScheme.background))),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
       unselectedItemColor: kcolorScheme.primary.withOpacity(0.6),
       selectedItemColor: kcolorScheme.primary,

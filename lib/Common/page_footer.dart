@@ -1,24 +1,28 @@
+import 'package:app_crt/Common/Constants/indexes.dart';
+import 'package:app_crt/Common/Constants/names.dart';
 import 'package:app_crt/Common/Constants/screens.dart';
+import 'package:app_crt/Providers/login_info.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class IconFooter extends StatefulWidget {
+class IconFooter extends ConsumerStatefulWidget {
   const IconFooter({super.key});
 
   @override
-  State<IconFooter> createState() => _IconFooterState();
+  ConsumerState<IconFooter> createState() => _IconFooterState();
 }
 
-class _IconFooterState extends State<IconFooter> {
+class _IconFooterState extends ConsumerState<IconFooter> {
   int _currentIndex = 0;
   final List<int> _historyIndex = [0];
 
-  final _screens = studentScreens;
-  final _items = studentItems;
+  List<Widget> _screens = [];
+  List<BottomNavigationBarItem> _items = [];
 
   bool _onPopInvoked() {
     if (_historyIndex.last == 0) {
       setState(() {
-        _historyIndex.replaceRange(0, _historyIndex.length, []);
+        _historyIndex.replaceRange(0, _historyIndex.length - 1, []);
       });
     }
     // if (_historyIndex.contains(_currentIndex)) {
@@ -47,7 +51,19 @@ class _IconFooterState extends State<IconFooter> {
 
   @override
   Widget build(BuildContext context) {
+    final loginDetails = ref.watch(loginProvider);
     print("Kardiya Build ");
+    if (loginDetails.role == Navigation.tpo ||
+        loginDetails.role == Navigation.editor) {
+      _screens = tpoScreens;
+      _items = tpoItems;
+      _currentIndex = _currentIndex > ConstIndex.batchIndex ? 0 : _currentIndex;
+    } else {
+      _screens = studentScreens;
+      _items = studentItems;
+      _currentIndex =
+          _currentIndex > ConstIndex.profileAttendanceIndex ? 0 : _currentIndex;
+    }
     return PopScope(
       canPop: _historyIndex.length == 1 ? true : false,
       onPopInvoked: (didPop) {
@@ -62,7 +78,7 @@ class _IconFooterState extends State<IconFooter> {
             type: BottomNavigationBarType.shifting,
             currentIndex: _currentIndex,
             onTap: _updateIndex,
-            showSelectedLabels: _currentIndex >= 3,
+            showSelectedLabels: false,
             showUnselectedLabels: true,
             enableFeedback: false,
             items: _items),

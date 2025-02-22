@@ -31,7 +31,7 @@
 // //   }
 
 //   List<Widget> _screens = [];
-//   List<BottomNavigationBarItem> _items = [];
+//   List<BottomNavigationBarItem> _items = [];,
 //   int _currentIndex = 0;
 
 //   @override

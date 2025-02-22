@@ -32,9 +32,10 @@ class AnnouncementHelper {
         url,
         headers: {"content-type": "application/json"},
         body: jsonEncode(
-          {"message": announcement},
+          {"sender": announcement},
         ),
       );
+      // print(response.body);
 
       // print("The Response contains : ${response.body}");
     } catch (e) {
