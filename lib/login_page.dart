@@ -1,3 +1,4 @@
+import 'package:app_crt/Common/Widgets/text_field.dart';
 import 'package:app_crt/Providers/login_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -53,56 +54,35 @@ class LoginPageState extends ConsumerState<LoginPage> {
                   key: formKey,
                   child: Column(
                     children: [
-                      TextFormField(
+                      MyTextFormField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return "Please enter your college email";
                           }
                           return null;
                         },
-                        controller: emailController,
-                        decoration: InputDecoration(
-                          labelText: "Email",
-                          labelStyle: Theme.of(context).textTheme.bodyLarge,
-                          hintText: "Enter your college email",
-                          hintStyle: Theme.of(context).textTheme.bodyMedium,
-                          border: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
-                        ),
+                        textEditingController: emailController,
+                        labelText: "Email",
+                        hintText: "Enter your college email",
                         keyboardType: TextInputType.emailAddress,
                       ),
-                      const SizedBox(height: 16),
-                      TextFormField(
+                      const SizedBox(height: 12),
+                      MyTextFormField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return "Enter your college roll number";
                           }
                           return null;
                         },
-                        controller: passwordController,
-                        decoration: InputDecoration(
-                          hintText: "Enter your roll no.",
-                          hintStyle: Theme.of(context).textTheme.bodyMedium,
-                          labelText: "Password",
-                          labelStyle: Theme.of(context).textTheme.bodyLarge,
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onBackground
-                                    .withOpacity(0.7)),
-                          ),
-                          border: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
-                        ),
+                        textEditingController: passwordController,
+                        hintText: "Enter your roll no.",
+                        labelText: "Password",
                         obscureText: true,
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 16),
+                // const SizedBox(height: 8),
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
@@ -110,7 +90,7 @@ class LoginPageState extends ConsumerState<LoginPage> {
                     child: const Text("Forgot Password?"),
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 12),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
