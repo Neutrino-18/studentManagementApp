@@ -36,7 +36,7 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
           TextButton(
             onPressed: () {
               Navigator.pop(context);
-              _newAnnouncement.clear();
+              // _newAnnouncement.clear();
             },
             child: Text(
               "Cancel",
@@ -47,12 +47,18 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
             ),
           ),
           ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 ref
                     .read(announcementProvider.notifier)
                     .announcementPoster(announcement);
-                _refresh();
+                _newAnnouncement.clear();
                 Navigator.pop(context);
+
+                await ref.refresh(announcementProvider.future);
+
+                // _refresh();
+                await Future.delayed(const Duration(milliseconds: 50));
+                _scrollToBottom();
               },
               child: Text(
                 "Confirm",
@@ -69,8 +75,17 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
   Future<void> _refresh() async {
     final _ = ref.refresh(announcementProvider);
     await ref.read(announcementProvider.future);
-    _scrollController.animateTo(_scrollController.position.maxScrollExtent,
-        duration: const Duration(milliseconds: 100), curve: Curves.linear);
+    _scrollToBottom();
+  }
+
+  void _scrollToBottom() {
+    if (_scrollController.hasClients) {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    }
   }
 
   @override
@@ -131,22 +146,20 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
                   ),
                 ),
                 if (ref.read(loginProvider).role == Navigation.tpo)
-                  MyTextField(
-                    onTap: () {
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
-                        if (_scrollController.hasClients) {
-                          _scrollController.animateTo(
-                            _scrollController.position.maxScrollExtent,
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeOut,
-                          );
-                        }
-                      });
+                  Focus(
+                    onFocusChange: (hasFocus) {
+                      if (hasFocus) {
+                        Future.delayed(
+                            const Duration(milliseconds: 100), _scrollToBottom);
+                      }
                     },
-                    textEditingController: _newAnnouncement,
-                    keyboardType: TextInputType.text,
-                    onSubmitted: _validatAnnouncement,
-                    labelText: "Announce Something",
+                    child: MyTextField(
+                      onTap: _scrollToBottom,
+                      textEditingController: _newAnnouncement,
+                      keyboardType: TextInputType.text,
+                      onSubmitted: _validatAnnouncement,
+                      labelText: "Announce Something",
+                    ),
                   ),
               ],
             ),
