@@ -51,14 +51,19 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
                 ref
                     .read(announcementProvider.notifier)
                     .announcementPoster(announcement);
+
                 _newAnnouncement.clear();
                 Navigator.pop(context);
 
-                await ref.refresh(announcementProvider.future);
+                //await ref.refresh(announcementProvider.future);
 
                 // _refresh();
-                await Future.delayed(const Duration(milliseconds: 50));
-                _scrollToBottom();
+                ref.read(announcementProvider);
+                // await ref.read(announcementProvider.future);
+                Future.microtask(() async {
+                  await Future.delayed(const Duration(milliseconds: 100));
+                  _scrollToBottom();
+                });
               },
               child: Text(
                 "Confirm",
@@ -74,7 +79,7 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
 
   Future<void> _refresh() async {
     final _ = ref.refresh(announcementProvider);
-    await ref.read(announcementProvider.future);
+    await Future.delayed(const Duration(milliseconds: 50));
     _scrollToBottom();
   }
 
