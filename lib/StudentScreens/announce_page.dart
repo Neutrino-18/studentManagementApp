@@ -20,13 +20,11 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text(
-          "Are you Sure!?",
-          style: Theme.of(context)
-              .textTheme
-              .titleLarge!
-              .copyWith(color: textColor),
-        ),
+        title: Text("Are you Sure!?",
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge!
+                .copyWith(color: textColor)),
         content: Text(
           "This message cannot be unsent. So please check again",
           style:

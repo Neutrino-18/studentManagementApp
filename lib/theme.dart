@@ -5,6 +5,7 @@ var kcolorScheme = ColorScheme.fromSeed(
   seedColor: const Color(0xff091235),
 ).copyWith(
   background: const Color.fromARGB(255, 250, 250, 250),
+  onBackground: const Color(0xff08090a),
   primary: Colors.blue[800],
   secondary: Colors.grey[200],
   tertiary: const Color.fromARGB(197, 0, 140, 255),
@@ -56,9 +57,10 @@ final selfTheme = ThemeData().copyWith(
 //
 //
 var darkColorScheme = const ColorScheme.dark(
-  background: Color.fromARGB(255, 24, 23, 29),
-  onBackground: Color.fromARGB(255, 45, 42, 54),
-  primary: Color.fromARGB(255, 194, 93, 212),
+  background: Color(0xff08090a),
+  onBackground: Color(0xfff5f6f6),
+  primary: Color(0xffe6e6e6),
+  secondary: Color.fromARGB(223, 187, 99, 202),
   surface: Color.fromARGB(255, 24, 23, 29),
   brightness: Brightness.dark,
 );

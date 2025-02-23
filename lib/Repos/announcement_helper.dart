@@ -1,5 +1,6 @@
 import 'package:app_crt/Common/Constants/api.dart';
 import 'package:app_crt/Modals/announcements.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -19,12 +20,12 @@ class AnnouncementHelper {
         throw Exception("Failed to load!!");
       }
     } catch (e) {
-      // print('Request Failed $e');
+      print('Request Failed $e');
       return [];
     }
   }
 
-  void postAnnouncements(String announcement) async {
+  void postAnnouncements(String announcement, String id) async {
     try {
       final url = Uri.parse(announcementPost);
 
@@ -32,10 +33,10 @@ class AnnouncementHelper {
         url,
         headers: {"content-type": "application/json"},
         body: jsonEncode(
-          {"sender": announcement},
+          {"message": announcement, "sender": id},
         ),
       );
-      // print(response.body);
+      print(response.body);
 
       // print("The Response contains : ${response.body}");
     } catch (e) {

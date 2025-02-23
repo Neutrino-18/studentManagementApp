@@ -37,103 +37,98 @@ class LoginPageState extends ConsumerState<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Theme.of(context).colorScheme.primary.withOpacity(0.8),
-              Theme.of(context).colorScheme.secondary
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
+        decoration:
+            BoxDecoration(color: Theme.of(context).colorScheme.background),
         child: Center(
-          child: Card(
-            color: Theme.of(context).colorScheme.background,
-            elevation: 8,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(22.69),
-            ),
-            margin: const EdgeInsets.symmetric(horizontal: 24),
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text("Sign In \n         To Win",
-                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          color: Theme.of(context).colorScheme.onBackground)),
-                  const SizedBox(height: 20),
-                  Form(
-                    key: formKey,
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Please enter your college email";
-                            }
-                            return null;
-                          },
-                          controller: emailController,
-                          decoration: InputDecoration(
-                            labelText: "Email",
-                            labelStyle: Theme.of(context).textTheme.bodyLarge,
-                            hintText: "Enter your college email",
-                            hintStyle: Theme.of(context).textTheme.bodyMedium,
-                            border: const OutlineInputBorder(),
-                          ),
-                          keyboardType: TextInputType.emailAddress,
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text("Sign In \n         To Win",
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground)),
+                const SizedBox(height: 20),
+                Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter your college email";
+                          }
+                          return null;
+                        },
+                        controller: emailController,
+                        decoration: InputDecoration(
+                          labelText: "Email",
+                          labelStyle: Theme.of(context).textTheme.bodyLarge,
+                          hintText: "Enter your college email",
+                          hintStyle: Theme.of(context).textTheme.bodyMedium,
+                          border: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
                         ),
-                        const SizedBox(height: 16),
-                        TextFormField(
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Enter your college roll number";
-                            }
-                            return null;
-                          },
-                          controller: passwordController,
-                          decoration: InputDecoration(
-                            hintText: "Enter your roll no.",
-                            hintStyle: Theme.of(context).textTheme.bodyMedium,
-                            labelText: "Password",
-                            labelStyle: Theme.of(context).textTheme.bodyLarge,
-                            border: const OutlineInputBorder(),
-                          ),
-                          obscureText: true,
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {},
-                      child: const Text("Forgot Password?"),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(
-                              Theme.of(context).colorScheme.background)),
-                      onPressed: () {
-                        _validateLogin(emailController.text.trimRight(),
-                            passwordController.text.trimRight());
-                      },
-                      child: Text(
-                        "Login",
-                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: Theme.of(context).colorScheme.onBackground),
+                        keyboardType: TextInputType.emailAddress,
                       ),
+                      const SizedBox(height: 16),
+                      TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Enter your college roll number";
+                          }
+                          return null;
+                        },
+                        controller: passwordController,
+                        decoration: InputDecoration(
+                          hintText: "Enter your roll no.",
+                          hintStyle: Theme.of(context).textTheme.bodyMedium,
+                          labelText: "Password",
+                          labelStyle: Theme.of(context).textTheme.bodyLarge,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onBackground
+                                    .withOpacity(0.7)),
+                          ),
+                          border: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                        ),
+                        obscureText: true,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {},
+                    child: const Text("Forgot Password?"),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(
+                            Theme.of(context).colorScheme.background)),
+                    onPressed: () {
+                      _validateLogin(emailController.text.trimRight(),
+                          passwordController.text.trimRight());
+                    },
+                    child: Text(
+                      "Login",
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          color: Theme.of(context).colorScheme.onBackground),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

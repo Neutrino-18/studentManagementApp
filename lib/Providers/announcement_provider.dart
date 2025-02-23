@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:app_crt/Common/Constants/api.dart';
 import 'package:app_crt/Modals/announcements.dart';
+import 'package:app_crt/Providers/login_info.dart';
 import 'package:app_crt/Repos/announcement_helper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -43,7 +45,8 @@ class AnnouncementNotifier extends AsyncNotifier<List<Announcement>> {
   }
 
   void announcementPoster(String announcement) {
-    announcementGiver.postAnnouncements(announcement);
+    final id = ref.read(loginProvider).userId;
+    announcementGiver.postAnnouncements(announcement, id!);
   }
 }
 
