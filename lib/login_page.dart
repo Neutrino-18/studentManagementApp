@@ -17,14 +17,14 @@ class LoginPageState extends ConsumerState<LoginPage> {
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
-  void _validateLogin(String email, String rollno) {
+  Future<void> _validateLogin(String email, String rollno) async {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
 
       ref.read(loginProvider.notifier).updateLogin(email, rollno);
     }
 
-    ref.read(loginProvider.notifier).loginUser(ref, context);
+    await ref.read(loginProvider.notifier).loginUser(ref, context);
   }
 
   @override

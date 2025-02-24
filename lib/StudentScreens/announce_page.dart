@@ -18,7 +18,8 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
 
   void _validatAnnouncement(String announcement) {
     final textColor = Theme.of(context).colorScheme.onBackground;
-
+    final asyncValue = ref.read(announcementProvider);
+    final isLoading = asyncValue.isLoading;
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -47,23 +48,30 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
             ),
           ),
           ElevatedButton(
-              onPressed: () async {
-                print("poster started");
-                await ref
-                    .read(announcementProvider.notifier)
-                    .announcementPoster(announcement);
-                print("poster ended");
+              onPressed: isLoading
+                  ? null
+                  : () async {
+                      print("poster started");
+                      final data = await ref
+                          .read(announcementProvider.notifier)
+                          .announcementPoster(announcement);
 
-                _newAnnouncement.clear();
-                Navigator.pop(context);
-                print("Refresh started");
-                await ref.refresh(announcementProvider.future);
-                print("Refresh ended");
-                Future.microtask(() async {
-                  await Future.delayed(const Duration(milliseconds: 100));
-                  _scrollToBottom();
-                });
-              },
+                      print("poster ended");
+                      const CircularProgressIndicator();
+
+                      _newAnnouncement.clear();
+
+                      Navigator.pop(context);
+
+                      print("Refresh started");
+                      await ref.refresh(announcementProvider.future);
+                      print("Refresh ended");
+
+                      Future.microtask(() async {
+                        await Future.delayed(const Duration(milliseconds: 100));
+                        _scrollToBottom();
+                      });
+                    },
               child: Text(
                 "Confirm",
                 style: Theme.of(context)

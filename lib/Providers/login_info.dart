@@ -8,49 +8,59 @@ final loginProvider = StateNotifierProvider<LoginDetailsNotifier, LoginState>(
     (ref) => LoginDetailsNotifier());
 
 class LoginDetailsNotifier extends StateNotifier<LoginState> {
-  LoginDetailsNotifier() : super(LoginState(email: '', rollno: '', role: ''));
+  LoginDetailsNotifier() : super(LoginState());
 
+  /* Update the login details */
   void updateLogin(String email, String rollno) {
-    state = state.copywith(email: email, rollno: rollno);
+    state = state.copyWith(email: email, rollno: rollno);
   }
 
-  void loginUser(WidgetRef ref, BuildContext context) async {
+  /* Login the user and navigating to the respective home screen */
+  Future<void> loginUser(WidgetRef ref, BuildContext context) async {
+    state = state.copyWith(isLoading: true, error: null, navigationEvent: null);
     final loginApi = ref.read(loginApiProvider);
-    final userIdAndRole = await loginApi.login(state.email!, state.rollno!);
+    try {
+      final userIdAndRole = await loginApi.login(state.email, state.rollno);
 
-    if (userIdAndRole.userId!.isNotEmpty && userIdAndRole.role!.isNotEmpty) {
-      state = state.copywith(
-          userId: userIdAndRole.userId,
-          role: userIdAndRole.role,
-          isLoggedIn: true);
-      print(userIdAndRole.userId);
-
-      switch (userIdAndRole.role) {
-        case Navigation.student:
-          Navigator.pushReplacementNamed(context, Destination.studentHome);
-          break;
-        case Navigation.tpo:
-          Navigator.pushReplacementNamed(context, Destination.tpoHome);
-          break;
-        case Navigation.instructor:
-          Navigator.pushReplacementNamed(context, Destination.instructorHome);
-          break;
-        case Navigation.editor:
-          Navigator.pushReplacementNamed(context, Destination.tpoHome);
-          // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          //   content: Text("Editor Dashboard in progress"),
-          //   duration: Duration(seconds: 3),
-          // ));
-          break;
-
-        default:
-          ScaffoldMessenger.of(context).clearSnackBars();
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Invalid Credentials")));
-          break;
+      if (userIdAndRole.role == "none") {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("Invalid Credentials")));
       }
+
+      if (userIdAndRole.userId.isNotEmpty && userIdAndRole.role.isNotEmpty) {
+        state = state.copyWith(
+            userId: userIdAndRole.userId,
+            role: userIdAndRole.role,
+            isLoggedIn: true);
+        print("The id inside the provider is : ${userIdAndRole.userId}");
+
+        switch (userIdAndRole.role) {
+          case NavigationConsts.studentRole:
+            break;
+          case NavigationConsts.tpoRole:
+            break;
+          case NavigationConsts.instructorRole:
+            break;
+
+          default:
+            ScaffoldMessenger.of(context).clearSnackBars();
+            ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Invalid Credentials")));
+            break;
+        }
+      } else {
+        throw Exception("Invalid Credentials");
+      }
+    } catch (e) {
+      state =
+          state.copyWith(isLoading: false, error: "Error with login is: $e");
     }
+  }
+
+  void clearNavigationEvent() {
+    state = state.copyWith(navigationEvent: null);
   }
 }
 
+/* Provider for the login fetcher */
 final loginApiProvider = Provider<LoginHelper>((ref) => LoginHelper());

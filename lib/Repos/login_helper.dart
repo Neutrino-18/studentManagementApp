@@ -16,7 +16,8 @@ class LoginHelper {
       // print(email);
       // print(rollno);
 
-      // print('THE RESPONSE IS : ${response.body}');
+      print('THE LOGIN RESPONSE IS : ${response.body}');
+      print('THE LOGIN STATUS IS : ${response.statusCode}');
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
         // print(data);
@@ -25,11 +26,11 @@ class LoginHelper {
         // print('The userID is : ${filteredData.userId}');
         return filteredData;
       } else {
-        return LoginState(userId: '');
+        return LoginState(role: 'none');
       }
     } catch (e) {
       print('Error with login is: $e');
-      return LoginState(userId: '');
+      return LoginState();
     }
   }
 }

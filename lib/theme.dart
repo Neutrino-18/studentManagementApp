@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+const myTextStyle = GoogleFonts.ebGaramond;
+final myTextTheme = GoogleFonts.ebGaramondTextTheme();
+
 var kcolorScheme = ColorScheme.fromSeed(
   seedColor: const Color(0xff091235),
 ).copyWith(
@@ -31,7 +34,7 @@ final selfTheme = ThemeData().copyWith(
 
   appBarTheme: const AppBarTheme().copyWith(
     color: kcolorScheme.primary,
-    titleTextStyle: GoogleFonts.ubuntuCondensed(
+    titleTextStyle: myTextStyle(
       fontWeight: FontWeight.bold,
       color: kcolorScheme.surface,
       fontSize: 35,
@@ -42,14 +45,14 @@ final selfTheme = ThemeData().copyWith(
   //     backgroundColor: MaterialStatePropertyAll(kcolorScheme.secondary),
   //   ),
   // ),
-  textTheme: GoogleFonts.ubuntuCondensedTextTheme().copyWith(
-    titleSmall: GoogleFonts.ubuntuCondensed(
+  textTheme: myTextTheme.copyWith(
+    titleSmall: myTextStyle(
       fontWeight: FontWeight.bold,
     ),
-    titleMedium: GoogleFonts.ubuntuCondensed(
+    titleMedium: myTextStyle(
       fontWeight: FontWeight.bold,
     ),
-    titleLarge: GoogleFonts.ubuntuCondensed(
+    titleLarge: myTextStyle(
       fontWeight: FontWeight.bold,
     ),
   ),
@@ -78,14 +81,14 @@ final selfDarkTheme = ThemeData.dark().copyWith(
   ),
   splashFactory: NoSplash.splashFactory,
   highlightColor: Colors.transparent,
-  textTheme: GoogleFonts.ubuntuCondensedTextTheme().copyWith(
-    titleSmall: GoogleFonts.ubuntuCondensed(
+  textTheme: myTextTheme.copyWith(
+    titleSmall: myTextStyle(
       fontWeight: FontWeight.bold,
     ),
-    titleMedium: GoogleFonts.ubuntuCondensed(
+    titleMedium: myTextStyle(
       fontWeight: FontWeight.bold,
     ),
-    titleLarge: GoogleFonts.ubuntuCondensed(
+    titleLarge: myTextStyle(
       fontWeight: FontWeight.bold,
     ),
   ),

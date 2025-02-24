@@ -47,6 +47,16 @@ class AnnouncementNotifier extends AsyncNotifier<List<Announcement>> {
   Future<void> announcementPoster(String announcement) async {
     final id = ref.read(loginProvider).userId;
     print("Awaiting the announcement Provider");
+    state = const AsyncValue.loading();
+    try {
+      await announcementGiver.postAnnouncements(announcement, id!);
+    } catch (e) {
+      state = AsyncValue.error(e, StackTrace.current);
+    }
+    // if (state.value!.contains(Announcement(content: announcement))) {
+    //   return;
+    // }
+
     await announcementGiver.postAnnouncements(announcement, id!);
     print("Awaited the provider");
     // print("Started Invalidating");

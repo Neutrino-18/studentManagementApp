@@ -1,13 +1,13 @@
-class Navigation {
-  static const student = "student";
-  static const tpo = "tpo";
-  static const instructor = "instructor";
-  static const editor = "editor";
-  static const interviewer = "interviewer";
+class NavigationConsts {
+  // Roles
+  static const studentRole = "student";
+  static const tpoRole = "tpo";
+  static const instructorRole = "instructor";
+
+  // Destinations according to the role
+  static const destStudentHome = "/studentHome";
+  static const destTpoHome = "/tpoHome";
+  static const destInstructorHome = "/tpoHome";
 }
 
-class Destination {
-  static const studentHome = "/studentHome";
-  static const tpoHome = "/tpoHome";
-  static const instructorHome = "/instructorHome";
-}
+enum Navigation { student, tpo, instructor, editor }
