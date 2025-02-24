@@ -25,7 +25,7 @@ class AnnouncementHelper {
     }
   }
 
-  void postAnnouncements(String announcement, String id) async {
+  Future<void> postAnnouncements(String announcement, String id) async {
     try {
       final url = Uri.parse(announcementPost);
 

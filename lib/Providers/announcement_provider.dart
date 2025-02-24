@@ -44,9 +44,14 @@ class AnnouncementNotifier extends AsyncNotifier<List<Announcement>> {
     return await announcementGiver.fetchAnnouncements();
   }
 
-  void announcementPoster(String announcement) {
+  Future<void> announcementPoster(String announcement) async {
     final id = ref.read(loginProvider).userId;
-    announcementGiver.postAnnouncements(announcement, id!);
+    print("Awaiting the announcement Provider");
+    await announcementGiver.postAnnouncements(announcement, id!);
+    print("Awaited the provider");
+    // print("Started Invalidating");
+    // ref.invalidateSelf();
+    // print("Invalidated");
   }
 }
 

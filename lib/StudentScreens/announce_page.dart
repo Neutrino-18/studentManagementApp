@@ -48,18 +48,17 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
           ),
           ElevatedButton(
               onPressed: () async {
-                ref
+                print("poster started");
+                await ref
                     .read(announcementProvider.notifier)
                     .announcementPoster(announcement);
+                print("poster ended");
 
                 _newAnnouncement.clear();
                 Navigator.pop(context);
-
-                //await ref.refresh(announcementProvider.future);
-
-                // _refresh();
-                ref.read(announcementProvider);
-                // await ref.read(announcementProvider.future);
+                print("Refresh started");
+                await ref.refresh(announcementProvider.future);
+                print("Refresh ended");
                 Future.microtask(() async {
                   await Future.delayed(const Duration(milliseconds: 100));
                   _scrollToBottom();
@@ -78,7 +77,7 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
   }
 
   Future<void> _refresh() async {
-    final _ = ref.refresh(announcementProvider);
+    ref.refresh(announcementProvider);
     await Future.delayed(const Duration(milliseconds: 50));
     _scrollToBottom();
   }
@@ -102,21 +101,23 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
       appBar: AppBar(
         title: const Text("Announcement"),
       ),
-      body: RefreshIndicator(
-        onRefresh: _refresh,
-        child: announcements.when(
-          error: (error, stackTrace) => Center(
-            child: Text("Error $error"),
-          ),
-          loading: () => const Center(child: CircularProgressIndicator()),
-          data: (announcements) => Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Expanded(
+              child: RefreshIndicator(
+                onRefresh: _refresh,
+                child: announcements.when(
+                  error: (error, stackTrace) => Center(
+                    child: Text("Error $error"),
+                  ),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  data: (announcements) => ListView.builder(
                     // padding:
                     //   const EdgeInsets.symmetric(vertical: 25, horizontal: 8),
+                    physics: const AlwaysScrollableScrollPhysics(),
                     controller: _scrollController,
                     itemCount: announcements.length,
                     itemBuilder: (context, index) {
@@ -150,25 +151,25 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
                     },
                   ),
                 ),
-                if (ref.read(loginProvider).role == Navigation.tpo)
-                  Focus(
-                    onFocusChange: (hasFocus) {
-                      if (hasFocus) {
-                        Future.delayed(
-                            const Duration(milliseconds: 100), _scrollToBottom);
-                      }
-                    },
-                    child: MyTextField(
-                      onTap: _scrollToBottom,
-                      textEditingController: _newAnnouncement,
-                      keyboardType: TextInputType.text,
-                      onSubmitted: _validatAnnouncement,
-                      labelText: "Announce Something",
-                    ),
-                  ),
-              ],
+              ),
             ),
-          ),
+            if (ref.read(loginProvider).role == Navigation.tpo)
+              Focus(
+                onFocusChange: (hasFocus) {
+                  if (hasFocus) {
+                    Future.delayed(
+                        const Duration(milliseconds: 100), _scrollToBottom);
+                  }
+                },
+                child: MyTextField(
+                  onTap: _scrollToBottom,
+                  textEditingController: _newAnnouncement,
+                  keyboardType: TextInputType.text,
+                  onSubmitted: _validatAnnouncement,
+                  labelText: "Announce Something",
+                ),
+              ),
+          ],
         ),
       ),
     );
