@@ -1,3 +1,4 @@
+import 'package:app_crt/Common/Constants/names.dart';
 import "package:app_crt/Common/page_footer.dart";
 
 import 'package:app_crt/login_page.dart';
@@ -26,9 +27,8 @@ class MyApp extends StatelessWidget {
       darkTheme: selfDarkTheme,
       home: const ProviderScope(child: LoginPage()),
       routes: {
-        '/studentHome': (context) => const IconFooter(),
-        '/tpoHome': (context) => const IconFooter(),
-        // '/instructorHome': (context) => const InstructorHome(),
+        NavigationConsts.destStudentHome: (context) => const IconFooter(),
+        NavigationConsts.destTpoHome: (context) => const IconFooter(),
       },
     );
   }

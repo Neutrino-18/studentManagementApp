@@ -10,4 +10,4 @@ class NavigationConsts {
   static const destInstructorHome = "/tpoHome";
 }
 
-enum Navigation { student, tpo, instructor, editor }
+enum Roles { student, tpo, instructor, editor }

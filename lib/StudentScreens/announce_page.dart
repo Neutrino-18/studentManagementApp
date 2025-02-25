@@ -161,7 +161,7 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
                 ),
               ),
             ),
-            if (ref.read(loginProvider).role == Navigation.tpo)
+            if (ref.read(loginProvider).role == NavigationConsts.tpoRole)
               Focus(
                 onFocusChange: (hasFocus) {
                   if (hasFocus) {

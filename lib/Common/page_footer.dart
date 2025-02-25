@@ -53,9 +53,8 @@ class _IconFooterState extends ConsumerState<IconFooter> {
   Widget build(BuildContext context) {
     final loginDetails = ref.watch(loginProvider);
     print("Kardiya Build ");
-    if (loginDetails.role == Navigation.tpo ||
-        loginDetails.role == Navigation.editor ||
-        loginDetails.role == Navigation.instructor) {
+    if (loginDetails.role == NavigationConsts.tpoRole ||
+        loginDetails.role == NavigationConsts.instructorRole) {
       _screens = tpoScreens;
       _items = tpoItems;
       _currentIndex = _currentIndex > ConstIndex.batchIndex ? 0 : _currentIndex;

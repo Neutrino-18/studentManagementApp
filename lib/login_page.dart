@@ -1,5 +1,6 @@
 import 'package:app_crt/Common/Constants/names.dart';
 import 'package:app_crt/Common/Widgets/text_field.dart';
+import 'package:app_crt/Common/page_footer.dart';
 import 'package:app_crt/Modals/login.dart';
 import 'package:app_crt/Providers/login_info.dart';
 import 'package:flutter/material.dart';
@@ -33,27 +34,14 @@ class LoginPageState extends ConsumerState<LoginPage> {
       await ref.read(loginProvider.notifier).loginUser(ref);
       debugPrint("Finished Watching");
       final stateRead = ref.read(loginProvider);
-
-      if (stateRead.navigationEvent != null) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          switch (stateRead.navigationEvent) {
-            case Navigation.student:
-              Navigator.of(context).pushNamed(NavigationConsts.destStudentHome);
-              break;
-            case Navigation.tpo:
-              Navigator.of(context).pushNamed(NavigationConsts.destTpoHome);
-              break;
-            case Navigation.instructor:
-              Navigator.of(context)
-                  .pushNamed(NavigationConsts.destInstructorHome);
-              break;
-            default:
-              break;
-          }
-        });
+      debugPrint("Read Provider");
+      if (stateRead.isLoggedIn) {
+        debugPrint("Navigating");
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) {
+          return const IconFooter();
+        }));
       }
-
-      ref.read(loginProvider.notifier).clearNavigationEvent();
     }
   }
 
@@ -127,7 +115,7 @@ class LoginPageState extends ConsumerState<LoginPage> {
                   child: ElevatedButton(
                     style: ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(
-                            Theme.of(context).colorScheme.background)),
+                            Theme.of(context).colorScheme.onBackground)),
                     onPressed: () {
                       _validateLogin(emailController.text.trimRight(),
                           passwordController.text.trimRight());
@@ -140,12 +128,20 @@ class LoginPageState extends ConsumerState<LoginPage> {
                                 .textTheme
                                 .titleSmall!
                                 .copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onBackground),
+                                    color:
+                                        Theme.of(context).colorScheme.surface),
                           ),
                   ),
                 ),
+                if (loginWatcher.error != null)
+                  Text(
+                    "Oh oh ${loginWatcher.error}.\n Check Your Internet Connection",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall!
+                        .copyWith(color: Theme.of(context).colorScheme.error),
+                    textAlign: TextAlign.center,
+                  ),
               ],
             ),
           ),
@@ -154,17 +150,3 @@ class LoginPageState extends ConsumerState<LoginPage> {
     );
   }
 }
-
-
-
-
-// isLoading
-//                           ? null
-//                           : () async {
-//                               ref.read(loginProvider.notifier).state = true;
-//                               await Future.delayed(const Duration(seconds: 2));
-//                               ref.read(loginProvider.notifier).state = false;
-//                             },
-//                       child: isLoading
-//                           ? const CircularProgressIndicator(color: Colors.white)
-//                           : const Text("Login"),

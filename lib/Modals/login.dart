@@ -9,7 +9,7 @@ class LoginState {
     this.isLoggedIn = false,
     this.isLoading = false,
     this.error,
-    this.navigationEvent,
+    // this.navigationEvent,
   });
 
   final String email;
@@ -19,7 +19,7 @@ class LoginState {
   final bool isLoggedIn;
   final bool isLoading;
   String? error;
-  final Navigation? navigationEvent;
+  // final Navigation? navigationEvent;
 
   LoginState copyWith({
     String? email,
@@ -29,7 +29,7 @@ class LoginState {
     bool? isLoggedIn,
     bool? isLoading,
     String? error,
-    Navigation? navigationEvent,
+    //   Navigation? navigationEvent,
   }) {
     return LoginState(
       email: email ?? this.email,
@@ -39,7 +39,7 @@ class LoginState {
       isLoggedIn: isLoggedIn ?? this.isLoggedIn,
       isLoading: isLoading ?? this.isLoading,
       error: error ?? this.error,
-      navigationEvent: navigationEvent,
+      //   navigationEvent: navigationEvent,
     );
   }
 

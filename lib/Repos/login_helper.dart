@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app_crt/Common/Constants/api.dart';
 import 'package:app_crt/Modals/login.dart';
 import 'package:http/http.dart' as http;
@@ -14,7 +16,7 @@ class LoginHelper {
               {"email": email, "password": rollno},
             ),
           )
-          .timeout(const Duration(seconds: 5));
+          .timeout(const Duration(seconds: 4));
       // print(email);
       // print(rollno);
 
@@ -28,11 +30,18 @@ class LoginHelper {
         // print('The userID is : ${filteredData.userId}');
         return filteredData;
       } else {
+        print("Entered Else case of helper");
         throw Exception('Invalid Credentials');
       }
+    } on http.ClientException {
+      print("Client Exception");
+      throw Exception("Unable to connect to the server");
+    } on TimeoutException {
+      print("Timeout Exception");
+      throw Exception("Connection Timed Out");
     } catch (e) {
       print('Error with login is: $e');
-      return LoginState(error: e.toString());
+      throw Exception("An unexpected Error Occured $e");
     }
   }
 }

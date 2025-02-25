@@ -8,7 +8,7 @@ var kcolorScheme = ColorScheme.fromSeed(
   seedColor: const Color(0xff091235),
 ).copyWith(
   background: const Color.fromARGB(255, 250, 250, 250),
-  onBackground: const Color(0xff08090a),
+  onBackground: const Color.fromARGB(209, 8, 9, 10),
   primary: Colors.blue[800],
   secondary: Colors.grey[200],
   tertiary: const Color.fromARGB(197, 0, 140, 255),
