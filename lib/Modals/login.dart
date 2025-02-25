@@ -4,7 +4,7 @@ class LoginState {
   LoginState({
     this.email = '',
     this.rollno = '',
-    this.role = 'none',
+    this.role = '',
     this.userId = '',
     this.isLoggedIn = false,
     this.isLoading = false,

@@ -6,13 +6,15 @@ import 'dart:convert';
 class LoginHelper {
   Future<LoginState> login(String email, String rollno) async {
     try {
-      final response = await http.post(
-        Uri.parse(loginFetch),
-        headers: {"content-type": "application/json"},
-        body: jsonEncode(
-          {"email": email, "password": rollno},
-        ),
-      );
+      final response = await http
+          .post(
+            Uri.parse(loginFetch),
+            headers: {"content-type": "application/json"},
+            body: jsonEncode(
+              {"email": email, "password": rollno},
+            ),
+          )
+          .timeout(const Duration(seconds: 5));
       // print(email);
       // print(rollno);
 
@@ -26,11 +28,11 @@ class LoginHelper {
         // print('The userID is : ${filteredData.userId}');
         return filteredData;
       } else {
-        return LoginState(role: 'none');
+        throw Exception('Invalid Credentials');
       }
     } catch (e) {
       print('Error with login is: $e');
-      return LoginState();
+      return LoginState(error: e.toString());
     }
   }
 }

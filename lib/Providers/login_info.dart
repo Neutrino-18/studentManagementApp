@@ -16,42 +16,55 @@ class LoginDetailsNotifier extends StateNotifier<LoginState> {
   }
 
   /* Login the user and navigating to the respective home screen */
-  Future<void> loginUser(WidgetRef ref, BuildContext context) async {
-    state = state.copyWith(isLoading: true, error: null, navigationEvent: null);
+  Future<void> loginUser(WidgetRef ref) async {
+    debugPrint("Entered loginUser in Provider");
+    state = state.copyWith(isLoading: true);
+    debugPrint("Reading apiProvider");
     final loginApi = ref.read(loginApiProvider);
+    debugPrint("Read apiProvider");
     try {
-      final userIdAndRole = await loginApi.login(state.email, state.rollno);
+      print("Entered try Block");
+      LoginState userDetails = state;
 
-      if (userIdAndRole.role == "none") {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("Invalid Credentials")));
-      }
+      debugPrint("Entered delayed function");
+      userDetails = await loginApi.login(state.email, state.rollno);
+      debugPrint("Awaited login");
 
-      if (userIdAndRole.userId.isNotEmpty && userIdAndRole.role.isNotEmpty) {
-        state = state.copyWith(
-            userId: userIdAndRole.userId,
-            role: userIdAndRole.role,
-            isLoggedIn: true);
-        print("The id inside the provider is : ${userIdAndRole.userId}");
+      final Navigation? event;
+      if (userDetails.userId.isNotEmpty && userDetails.role.isNotEmpty) {
+        print(
+            "The id inside the provider is : ${userDetails.userId} and the role is : ${userDetails.role}");
 
-        switch (userIdAndRole.role) {
+        switch (userDetails.role) {
           case NavigationConsts.studentRole:
+            event = Navigation.student;
             break;
           case NavigationConsts.tpoRole:
+            event = Navigation.tpo;
             break;
           case NavigationConsts.instructorRole:
+            event = Navigation.instructor;
             break;
 
           default:
-            ScaffoldMessenger.of(context).clearSnackBars();
-            ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Invalid Credentials")));
-            break;
+            print("Entered Default");
+            state = state.copyWith(isLoading: false);
+            throw Exception("Invalid Credentials");
         }
+
+        state = state.copyWith(
+            userId: userDetails.userId,
+            role: userDetails.role,
+            isLoggedIn: true,
+            isLoading: false,
+            navigationEvent: event);
       } else {
+        print("Entered Else case");
+        state = state.copyWith(isLoading: false);
         throw Exception("Invalid Credentials");
       }
     } catch (e) {
+      print("Entered the catch block");
       state =
           state.copyWith(isLoading: false, error: "Error with login is: $e");
     }

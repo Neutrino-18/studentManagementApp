@@ -1,4 +1,6 @@
+import 'package:app_crt/Common/Constants/names.dart';
 import 'package:app_crt/Common/Widgets/text_field.dart';
+import 'package:app_crt/Modals/login.dart';
 import 'package:app_crt/Providers/login_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,13 +20,41 @@ class LoginPageState extends ConsumerState<LoginPage> {
   final formKey = GlobalKey<FormState>();
 
   Future<void> _validateLogin(String email, String rollno) async {
+    debugPrint("Entered validation");
     if (formKey.currentState!.validate()) {
+      debugPrint("Validated");
       formKey.currentState!.save();
-
+      debugPrint("Saved");
+      debugPrint("Reading");
       ref.read(loginProvider.notifier).updateLogin(email, rollno);
-    }
+      debugPrint("Read");
 
-    await ref.read(loginProvider.notifier).loginUser(ref, context);
+      debugPrint("Starting Watching");
+      await ref.read(loginProvider.notifier).loginUser(ref);
+      debugPrint("Finished Watching");
+      final stateRead = ref.read(loginProvider);
+
+      if (stateRead.navigationEvent != null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          switch (stateRead.navigationEvent) {
+            case Navigation.student:
+              Navigator.of(context).pushNamed(NavigationConsts.destStudentHome);
+              break;
+            case Navigation.tpo:
+              Navigator.of(context).pushNamed(NavigationConsts.destTpoHome);
+              break;
+            case Navigation.instructor:
+              Navigator.of(context)
+                  .pushNamed(NavigationConsts.destInstructorHome);
+              break;
+            default:
+              break;
+          }
+        });
+      }
+
+      ref.read(loginProvider.notifier).clearNavigationEvent();
+    }
   }
 
   @override
@@ -36,6 +66,7 @@ class LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final loginWatcher = ref.watch(loginProvider);
     return Scaffold(
       body: Container(
         decoration:
@@ -101,11 +132,18 @@ class LoginPageState extends ConsumerState<LoginPage> {
                       _validateLogin(emailController.text.trimRight(),
                           passwordController.text.trimRight());
                     },
-                    child: Text(
-                      "Login",
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: Theme.of(context).colorScheme.onBackground),
-                    ),
+                    child: loginWatcher.isLoading
+                        ? const CircularProgressIndicator()
+                        : Text(
+                            "Login",
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall!
+                                .copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground),
+                          ),
                   ),
                 ),
               ],
