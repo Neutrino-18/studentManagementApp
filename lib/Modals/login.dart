@@ -1,5 +1,3 @@
-import 'package:app_crt/Common/Constants/names.dart';
-
 class LoginState {
   LoginState({
     this.email = '',

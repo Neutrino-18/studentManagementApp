@@ -31,7 +31,7 @@ class LoginHelper {
         return filteredData;
       } else {
         print("Entered Else case of helper");
-        throw Exception('Invalid Credentials');
+        return LoginState(error: 'Invalid Credentialssssssssssssssssss');
       }
     } on http.ClientException {
       print("Client Exception");
@@ -40,8 +40,8 @@ class LoginHelper {
       print("Timeout Exception");
       throw Exception("Connection Timed Out");
     } catch (e) {
-      print('Error with login is: $e');
-      throw Exception("An unexpected Error Occured $e");
+      print(' Entered catch block of helper. Error with login is: $e');
+      return LoginState(error: 'Invalid Creds');
     }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:app_crt/Common/Constants/indexes.dart';
 import 'package:app_crt/Common/Constants/names.dart';
 import 'package:app_crt/Common/Constants/screens.dart';
+import 'package:app_crt/Providers/index_provider.dart';
 import 'package:app_crt/Providers/login_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -57,7 +58,9 @@ class _IconFooterState extends ConsumerState<IconFooter> {
         loginDetails.role == NavigationConsts.instructorRole) {
       _screens = tpoScreens;
       _items = tpoItems;
-      _currentIndex = _currentIndex > ConstIndex.batchIndex ? 0 : _currentIndex;
+      _currentIndex = ref.read(indexProvider) > ConstIndex.batchIndex
+          ? 0
+          : ref.read(indexProvider);
     } else {
       _screens = studentScreens;
       _items = studentItems;
