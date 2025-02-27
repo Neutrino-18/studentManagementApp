@@ -53,7 +53,7 @@ class _IconFooterState extends ConsumerState<IconFooter> {
   @override
   Widget build(BuildContext context) {
     final loginDetails = ref.watch(loginProvider);
-    final tabIndex = ref.watch(indexProvider);
+    final tabIndex = ref.watch(indexProvider)
 
     print("Kardiya Build ");
     if (loginDetails.role == NavigationConsts.tpoRole ||
