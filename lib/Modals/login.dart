@@ -3,7 +3,7 @@ class LoginState {
     this.email = '',
     this.rollno = '',
     this.role = '',
-    this.userId = '',
+    this.userId,
     this.isLoggedIn = false,
     this.isLoading = false,
     this.error,
@@ -13,7 +13,7 @@ class LoginState {
   final String email;
   final String rollno;
   final String role;
-  final String userId;
+  final String? userId;
   final bool isLoggedIn;
   final bool isLoading;
   String? error;

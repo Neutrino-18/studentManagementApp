@@ -15,74 +15,76 @@ class IconFooter extends ConsumerStatefulWidget {
 
 class _IconFooterState extends ConsumerState<IconFooter> {
   int _currentIndex = 0;
-  final List<int> _historyIndex = [0];
+  // final List<int> _historyIndex = [0];
 
   List<Widget> _screens = [];
   List<BottomNavigationBarItem> _items = [];
 
-  bool _onPopInvoked() {
-    if (_historyIndex.last == 0) {
-      setState(() {
-        _historyIndex.replaceRange(0, _historyIndex.length - 1, []);
-      });
-    }
-    // if (_historyIndex.contains(_currentIndex)) {
-    //   setState(() {
-    //     _historyIndex.removeWhere((index) => index == _currentIndex);
-    //   });
-    // }
-    if (_historyIndex.length > 1) {
-      setState(() {
-        _historyIndex.removeLast();
-        _currentIndex = _historyIndex.last;
-      });
-      return false;
-    }
-    return true;
-  }
+  // bool _onPopInvoked() {
+  //   if (_historyIndex.last == 0) {
+  //     setState(() {
+  //       _historyIndex.replaceRange(0, _historyIndex.length - 1, []);
+  //     });
+  //   }
+  //   // if (_historyIndex.contains(_currentIndex)) {
+  //   //   setState(() {
+  //   //     _historyIndex.removeWhere((index) => index == _currentIndex);
+  //   //   });
+  //   // }
+  //   if (_historyIndex.length > 1) {
+  //     setState(() {
+  //       _historyIndex.removeLast();
+  //       _currentIndex = _historyIndex.last;
+  //     });
+  //     return false;
+  //   }
+  //   return true;
+  // }
 
-  void _updateIndex(int index) {
-    if (index != _currentIndex) {
-      setState(() {
-        _currentIndex = index;
-        _historyIndex.add(index);
-      });
-    }
-  }
+  // void _updateIndex(int index) {
+  //   ref.read(indexProvider);
+  //   if (index != _currentIndex) {
+  //     _currentIndex = tabIndex;
+  //     setState(() {
+  //       _historyIndex.add(index);
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     final loginDetails = ref.watch(loginProvider);
     final tabIndex = ref.watch(indexProvider);
+    final historyCare = ref.watch(historyProvider);
 
     print("Kardiya Build ");
     if (loginDetails.role == NavigationConsts.tpoRole ||
         loginDetails.role == NavigationConsts.instructorRole) {
       _screens = tpoScreens;
       _items = tpoItems;
-      _currentIndex = ref.read(indexProvider) > ConstIndex.batchIndex
-          ? 0
-          : ref.read(indexProvider);
+      _currentIndex = tabIndex > ConstIndex.batchIndex ? 0 : tabIndex;
     } else {
       _screens = studentScreens;
       _items = studentItems;
       _currentIndex =
-          _currentIndex > ConstIndex.profileAttendanceIndex ? 0 : _currentIndex;
+          tabIndex > ConstIndex.profileAttendanceIndex ? 0 : tabIndex;
     }
     return PopScope(
-      canPop: _historyIndex.length == 1 ? true : false,
+      canPop: historyCare.length == 1 ? true : false,
       onPopInvoked: (didPop) {
-        _onPopInvoked();
+        ref.read(historyProvider.notifier).onPopInvoked(ref);
       },
       child: Scaffold(
         body: IndexedStack(
-          index: _currentIndex,
-          children: [_screens[tabIndex]],
+          index: tabIndex,
+          children: _screens,
         ),
         bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.shifting,
             currentIndex: _currentIndex,
-            onTap: _updateIndex,
+            onTap: (index) {
+              ref.read(historyProvider.notifier).updateIndex(index, ref);
+            },
             showSelectedLabels: false,
             showUnselectedLabels: true,
             enableFeedback: false,

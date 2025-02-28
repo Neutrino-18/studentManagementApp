@@ -5,14 +5,12 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class AnnouncementHelper {
+  /* fetching the announcements from the server */
   Future<List<Announcement>> fetchAnnouncements() async {
-    // print('fetcher reached');
     try {
       final url = Uri.parse(announcementFetch);
 
       final response = await http.get(url);
-      // print(response.statusCode);
-      // print(response.body);
       if (response.statusCode == 200) {
         final List<dynamic> data = jsonDecode(response.body);
         return data.map((json) => Announcement.fromJson(json)).toList();
@@ -25,6 +23,7 @@ class AnnouncementHelper {
     }
   }
 
+  /* posting the announcements to the server */
   Future<void> postAnnouncements(String announcement, String id) async {
     try {
       final url = Uri.parse(announcementPost);
@@ -38,7 +37,7 @@ class AnnouncementHelper {
       );
       print(response.body);
 
-      // print("The Response contains : ${response.body}");
+      print("The Response of postAnnouncement contains : ${response.body}");
     } catch (e) {
       print("The error with posting announcement is $e");
     }

@@ -29,7 +29,7 @@ class LoginDetailsNotifier extends StateNotifier<LoginState> {
       debugPrint("Awaited login");
 
       //  final Navigation? event;
-      if (userDetails.userId.isNotEmpty && userDetails.role.isNotEmpty) {
+      if (userDetails.userId!.isNotEmpty && userDetails.role.isNotEmpty) {
         print(
             "The id inside the provider is : ${userDetails.userId} and the role is : ${userDetails.role}");
 

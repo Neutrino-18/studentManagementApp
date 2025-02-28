@@ -52,7 +52,7 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
                   ? null
                   : () async {
                       print("poster started");
-                      final data = await ref
+                      await ref
                           .read(announcementProvider.notifier)
                           .announcementPoster(announcement);
 
@@ -64,7 +64,7 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
                       Navigator.pop(context);
 
                       print("Refresh started");
-                      await ref.refresh(announcementProvider.future);
+                      final _ = await ref.refresh(announcementProvider.future);
                       print("Refresh ended");
 
                       Future.microtask(() async {
@@ -123,8 +123,6 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
                   loading: () =>
                       const Center(child: CircularProgressIndicator()),
                   data: (announcements) => ListView.builder(
-                    // padding:
-                    //   const EdgeInsets.symmetric(vertical: 25, horizontal: 8),
                     physics: const AlwaysScrollableScrollPhysics(),
                     controller: _scrollController,
                     itemCount: announcements.length,
