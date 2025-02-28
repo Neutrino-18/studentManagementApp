@@ -32,7 +32,7 @@ class BoxProp extends StatelessWidget {
           children: [
             Container(
               width: double.infinity,
-              color: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).colorScheme.onBackground,
               height: 40,
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: Text(headingText,
@@ -40,7 +40,8 @@ class BoxProp extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              color: Theme.of(context).colorScheme.secondary,
+              color:
+                  Theme.of(context).colorScheme.onBackground.withOpacity(0.8),
               padding: const EdgeInsets.all(10),
               child: Text(
                 contentText,
