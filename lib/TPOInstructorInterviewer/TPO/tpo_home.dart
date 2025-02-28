@@ -29,7 +29,9 @@ class TPOHomeScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ref.read(indexProvider.notifier).state = ConstIndex.announcementIndex;
+          ref
+              .read(historyProvider.notifier)
+              .updateIndex(ConstIndex.announcementIndex, ref);
         },
         backgroundColor: Theme.of(context).colorScheme.primary,
         elevation: 10,

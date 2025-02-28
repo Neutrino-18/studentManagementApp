@@ -58,6 +58,9 @@ class _IconFooterState extends ConsumerState<IconFooter> {
     final historyCare = ref.watch(historyProvider);
 
     print("Kardiya Build ");
+    print("Abhi ka index hai : $tabIndex");
+    print("historyCare:  $historyCare");
+
     if (loginDetails.role == NavigationConsts.tpoRole ||
         loginDetails.role == NavigationConsts.instructorRole) {
       _screens = tpoScreens;

@@ -9,8 +9,12 @@ class HistoryIndexNotifier extends StateNotifier<List<int>> {
 
   void updateIndex(int index, WidgetRef ref) {
     if (index != ref.read(indexProvider)) {
-      ref.read(indexProvider.notifier).state = index;
       state = [...state, index];
+      ref.read(indexProvider.notifier).state = index;
+    }
+
+    if (index == 0) {
+      state = [0];
     }
   }
 

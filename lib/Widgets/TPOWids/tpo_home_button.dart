@@ -12,7 +12,7 @@ class TPOHomeBut extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
-        ref.read(indexProvider.notifier).state = onTap;
+        ref.read(historyProvider.notifier).updateIndex(onTap, ref);
       },
       child: Container(
         width: 270,
