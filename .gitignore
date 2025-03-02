@@ -14,7 +14,7 @@ pubspec.lock
 doc/api/
 
 # dotenv environment variables file
-.env*
+*.env
 
 # Avoid committing generated Javascript files:
 *.dart.js
@@ -77,3 +77,6 @@ app.*.map.json
 >>>>>>> d6bd9ea (This is the First Commit)
 =======
 >>>>>>> d6bd9ea431172a62bc24d0f103a35a45c8f88a06
+
+# Extra SelfAdded
+lib/Common/Constants/api.dart

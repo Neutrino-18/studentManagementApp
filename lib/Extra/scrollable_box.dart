@@ -19,7 +19,7 @@ class AnimatedBoxScreenState extends State<AnimatedBoxScreen>
   static const _padding = EdgeInsets.symmetric(horizontal: 0.0);
   static const _animationDuration = Duration(milliseconds: 400);
 
-  late final PageController _pageController;
+  late PageController _pageController;
   int _currentPage = 0;
   final Map<int, GlobalKey> _boxKeys = {};
 
