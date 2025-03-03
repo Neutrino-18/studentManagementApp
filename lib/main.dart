@@ -1,15 +1,14 @@
 import 'package:app_crt/Common/Constants/names.dart';
 import "package:app_crt/Common/page_footer.dart";
-
 import 'package:app_crt/login_page.dart';
 import "package:flutter/material.dart";
 import 'package:app_crt/theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+// import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load();
+  // await dotenv.load(fileName: ".env");
   runApp(
     const ProviderScope(
       child: MyApp(),
