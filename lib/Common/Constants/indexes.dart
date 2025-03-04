@@ -1,5 +1,5 @@
 class ConstIndex {
-  static const homeIndex = 0;
+  static const defaultIndex = 0;
   static const announcementIndex = 1;
   static const batchIndex = 2;
   static const profileAttendanceIndex = 3;

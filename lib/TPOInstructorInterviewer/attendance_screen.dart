@@ -1,13 +1,23 @@
+import 'package:app_crt/Common/Constants/indexes.dart';
+import 'package:app_crt/Providers/index_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AttendenceScreen extends StatelessWidget {
+class AttendenceScreen extends ConsumerWidget {
   const AttendenceScreen({super.key});
 
   @override
-  Widget build(context) {
+  Widget build(context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Attendance'),
+        leading: IconButton(
+            onPressed: () {
+              ref
+                  .read(historyProvider.notifier)
+                  .updateIndex(ConstIndex.defaultIndex, ref);
+            },
+            icon: const Icon(Icons.arrow_back_ios_new)),
       ),
       body: SingleChildScrollView(
         child: Container(

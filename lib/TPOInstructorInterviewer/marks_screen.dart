@@ -11,7 +11,7 @@ class MarksScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Marks'),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () {
             ref.read(historyProvider.notifier).updateIndex(0, ref);
           },
