@@ -17,31 +17,31 @@ class LoginHelper {
             ),
           )
           .timeout(const Duration(seconds: 4));
-      // print(email);
-      // print(rollno);
 
       print('THE LOGIN RESPONSE IS : ${response.body}');
       print('THE LOGIN STATUS IS : ${response.statusCode}');
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
-        // print(data);
+
         final filteredData = LoginState.fromJson(data);
 
-        // print('The userID is : ${filteredData.userId}');
         return filteredData;
       } else {
         print("Entered Else case of helper");
-        return LoginState(error: 'Invalid Credentialssssssssssssssssss');
+        final Map<String, dynamic> error = jsonDecode(response.body);
+
+        throw error.values.first;
       }
     } on http.ClientException {
       print("Client Exception");
-      throw Exception("Unable to connect to the server");
+      throw "Unable to connect to the server";
     } on TimeoutException {
       print("Timeout Exception");
       throw Exception("Connection Timed Out");
     } catch (e) {
-      print(' Entered catch block of helper. Error with login is: $e');
-      return LoginState(error: 'Invalid Creds');
+      print(
+          ' Entered catch block of helper. Error with login is: ${e.toString()}');
+      rethrow;
     }
   }
 }

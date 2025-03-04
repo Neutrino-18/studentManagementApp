@@ -114,12 +114,18 @@ class LoginPageState extends ConsumerState<LoginPage> {
                     style: ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(
                             Theme.of(context).colorScheme.onBackground)),
-                    onPressed: () {
-                      _validateLogin(emailController.text.trimRight(),
+                    onPressed: () async {
+                      await _validateLogin(emailController.text.trimRight(),
                           passwordController.text.trimRight());
                     },
                     child: loginWatcher.isLoading
-                        ? const CircularProgressIndicator()
+                        ? CircularProgressIndicator(
+                            backgroundColor: Theme.of(context)
+                                .colorScheme
+                                .background
+                                .withOpacity(0.7),
+                            color: Theme.of(context).colorScheme.background,
+                          )
                         : Text(
                             "Login",
                             style: Theme.of(context)
@@ -133,7 +139,7 @@ class LoginPageState extends ConsumerState<LoginPage> {
                 ),
                 if (loginWatcher.error != null)
                   Text(
-                    "Oh oh ${loginWatcher.error}.\n Check Your Internet Connection",
+                    "Oh oh ${loginWatcher.error}.",
                     style: Theme.of(context)
                         .textTheme
                         .bodySmall!

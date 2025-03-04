@@ -28,49 +28,25 @@ class LoginDetailsNotifier extends StateNotifier<LoginState> {
       final userDetails = await loginApi.login(state.email, state.rollno);
       debugPrint("Awaited login");
 
-      //  final Navigation? event;
-      if (userDetails.userId!.isNotEmpty && userDetails.role.isNotEmpty) {
+      if (userDetails.userId.isNotEmpty && userDetails.role.isNotEmpty) {
         print(
             "The id inside the provider is : ${userDetails.userId} and the role is : ${userDetails.role}");
-
-        // switch (userDetails.role) {
-        //   case NavigationConsts.studentRole:
-        //     event = Navigation.student;
-        //     break;
-        //   case NavigationConsts.tpoRole:
-        //     event = Navigation.tpo;
-        //     break;
-        //   case NavigationConsts.instructorRole:
-        //     event = Navigation.instructor;
-        //     break;
-
-        //   default:
-        //     print("Entered Default");
-        //     state = state.copyWith(isLoading: false);
-        //     throw Exception("Invalid Credentials");
-        // }
 
         state = state.copyWith(
           userId: userDetails.userId,
           role: userDetails.role,
           isLoggedIn: true,
           isLoading: false,
-          //  navigationEvent: event
         );
       } else {
         print("Entered else in provider");
-        state = state.copyWith(isLoading: false);
-        throw Exception("Invalid Credentials");
+        state = state.copyWith(isLoading: false, error: "Invalid credentials");
       }
     } catch (e) {
       print("Entered the catch block in provider");
       state = state.copyWith(isLoading: false, error: e.toString());
     }
   }
-
-  // void clearNavigationEvent() {
-  //   state = state.copyWith(navigationEvent: null);
-  // }
 }
 
 /* Provider for the login fetcher */

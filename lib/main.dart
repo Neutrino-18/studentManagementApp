@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: selfTheme,
-      darkTheme: selfDarkTheme,
+      theme: AppTheme.selfTheme,
+      darkTheme: AppTheme.selfDarkTheme,
       home: const ProviderScope(child: LoginPage()),
       routes: {
         NavigationConsts.destStudentHome: (context) => const IconFooter(),
