@@ -7,10 +7,8 @@ final myTextTheme = GoogleFonts.ebGaramondTextTheme();
 /* Class for App Theming */
 class AppTheme {
   /* Light Mode Color Pallete */
-  static final kcolorScheme = ColorScheme.fromSeed(
-    seedColor: const Color(0xff091235),
-  ).copyWith(
-    background: const Color.fromARGB(255, 250, 250, 250),
+  static final kcolorScheme = const ColorScheme.light().copyWith(
+    background: const Color(0xffF7F7F7),
     onBackground: const Color.fromARGB(209, 8, 9, 10),
     primary: Colors.blue[800],
     secondary: Colors.grey[200],
@@ -68,7 +66,7 @@ class AppTheme {
 
   /* Dark Mode Color Pallete */
   static const darkColorScheme = ColorScheme.dark(
-    background: Color(0xff000000),
+    background: Color(0xff121212),
     onBackground: Color(0xfff5f6f6),
     primary: Color(0xff4285F4),
     secondary: Color(0xff7CB9E8),
@@ -92,11 +90,11 @@ class AppTheme {
     highlightColor: Colors.transparent,
     textTheme: myTextTheme.copyWith(
       titleSmall:
-          myTextStyle(color: darkModePrimaryText, fontWeight: FontWeight.bold),
+          myTextStyle(color: darkModePrimaryText, fontWeight: FontWeight.w400),
       titleMedium:
-          myTextStyle(color: darkModePrimaryText, fontWeight: FontWeight.bold),
+          myTextStyle(color: darkModePrimaryText, fontWeight: FontWeight.w400),
       titleLarge:
-          myTextStyle(color: darkModePrimaryText, fontWeight: FontWeight.bold),
+          myTextStyle(color: darkModePrimaryText, fontWeight: FontWeight.w400),
       bodyLarge:
           myTextStyle(color: darkModePrimaryText, fontWeight: FontWeight.w500),
       bodyMedium:
