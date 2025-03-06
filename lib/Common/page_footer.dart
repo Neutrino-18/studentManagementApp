@@ -15,42 +15,8 @@ class IconFooter extends ConsumerStatefulWidget {
 
 class _IconFooterState extends ConsumerState<IconFooter> {
   int _currentIndex = 0;
-  // final List<int> _historyIndex = [0];
-
   List<Widget> _screens = [];
   List<BottomNavigationBarItem> _items = [];
-
-  // bool _onPopInvoked() {
-  //   if (_historyIndex.last == 0) {
-  //     setState(() {
-  //       _historyIndex.replaceRange(0, _historyIndex.length - 1, []);
-  //     });
-  //   }
-  //   // if (_historyIndex.contains(_currentIndex)) {
-  //   //   setState(() {
-  //   //     _historyIndex.removeWhere((index) => index == _currentIndex);
-  //   //   });
-  //   // }
-  //   if (_historyIndex.length > 1) {
-  //     setState(() {
-  //       _historyIndex.removeLast();
-  //       _currentIndex = _historyIndex.last;
-  //     });
-  //     return false;
-  //   }
-  //   return true;
-  // }
-
-  // void _updateIndex(int index) {
-  //   ref.read(indexProvider);
-  //   if (index != _currentIndex) {
-  //     _currentIndex = tabIndex;
-  //     setState(() {
-  //       _historyIndex.add(index);
-  //     });
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     final loginDetails = ref.watch(loginProvider);

@@ -68,7 +68,7 @@ class AppTheme {
   static const darkColorScheme = ColorScheme.dark(
     background: Color(0xff121212),
     onBackground: Color(0xfff5f6f6),
-    primary: Color(0xff4285F4),
+    primary: Color.fromARGB(255, 62, 116, 202),
     secondary: Color(0xff7CB9E8),
     surface: Color(0xff121212),
     error: Color(0xffCF6679),
