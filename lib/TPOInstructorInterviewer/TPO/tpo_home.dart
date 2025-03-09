@@ -1,6 +1,8 @@
 import 'package:app_crt/Common/Constants/indexes.dart';
 import 'package:app_crt/Providers/index_provider.dart';
 import 'package:app_crt/Widgets/TPOWids/tpo_home_button.dart';
+import 'package:app_crt/custom_clip.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,30 +17,23 @@ class TPOHomeScreen extends ConsumerWidget {
         title: const Text('CAMPUS CONNECT'),
         elevation: 0,
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TPOHomeBut(
+            const TPOHomeBut(
                 text: 'Attendance', onTap: ConstIndex.profileAttendanceIndex),
-            SizedBox(height: 20),
-            TPOHomeBut(text: 'Marks', onTap: ConstIndex.marksNotesIndex),
-            SizedBox(height: 20),
-            // Stack(
-            //   children: [
-            //     Container(
-            //       height: 100,
-            //       width: 100,
-            //       decoration: const BoxDecoration(color: Colors.yellow,borderRadius: ),
-            //       child: const Center(
-            //         child: Text(
-            //           "nigga",
-            //           style: TextStyle(color: Colors.blue),
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
+            const SizedBox(height: 20),
+            const TPOHomeBut(text: 'Marks', onTap: ConstIndex.marksNotesIndex),
+            const SizedBox(height: 20),
+            CustomPaint(
+              painter: MyCustomPainter(),
+              child: Container(
+                height: 30,
+                width: 30,
+                color: Colors.yellow,
+              ),
+            ),
           ],
         ),
       ),

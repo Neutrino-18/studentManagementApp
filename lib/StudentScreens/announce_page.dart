@@ -2,6 +2,7 @@ import "package:app_crt/Common/Constants/names.dart";
 import "package:app_crt/Common/Widgets/text_field.dart";
 import "package:app_crt/Providers/announcement_provider.dart";
 import "package:app_crt/Providers/login_info.dart";
+import "package:app_crt/custom_clip.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
@@ -127,32 +128,50 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
                     controller: _scrollController,
                     itemCount: announcements.length,
                     itemBuilder: (context, index) {
-                      return SizedBox(
-                        width: double.infinity,
-                        child: Card(
-                          margin: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          clipBehavior: Clip.hardEdge,
-                          elevation: 5,
-                          color: tileColor,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 15),
-                            child: Text(
-                              announcements[index].content,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .background),
+                      return Stack(
+                        children: [
+                          Card(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 12, horizontal: 14),
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(8),
+                              bottomRight: Radius.circular(8),
+                              topRight: Radius.circular(8),
+                            )),
+                            clipBehavior: Clip.hardEdge,
+                            elevation: 5,
+                            color: tileColor,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 12, horizontal: 15),
+                              child: Text(
+                                announcements[index].content,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .background),
 
-                              // textAlign: TextAlign.center,
+                                // textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
-                        ),
+                          Positioned(
+                            top: 12,
+                            right: 339,
+                            child: CustomPaint(
+                              painter: MyCustomPainter(),
+                              child: Container(
+                                height: 30,
+                                width: 30,
+                                color: tileColor,
+                              ),
+                            ),
+                          )
+                        ],
                       );
                     },
                   ),

@@ -1,5 +1,6 @@
 import 'package:app_crt/Common/Constants/names.dart';
 import "package:app_crt/Common/page_footer.dart";
+import 'package:app_crt/TPOInstructorInterviewer/TPO/tpo_home.dart';
 import 'package:app_crt/login_page.dart';
 import "package:flutter/material.dart";
 import 'package:app_crt/theme.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.selfTheme,
       darkTheme: AppTheme.selfDarkTheme,
-      home: const ProviderScope(child: LoginPage()),
+      home: const ProviderScope(child: TPOHomeScreen()),
       routes: {
         NavigationConsts.destStudentHome: (context) => const IconFooter(),
         NavigationConsts.destTpoHome: (context) => const IconFooter(),
