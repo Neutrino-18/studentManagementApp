@@ -1,10 +1,8 @@
 import 'package:app_crt/Common/Constants/indexes.dart';
 import 'package:app_crt/Providers/index_provider.dart';
 import 'package:app_crt/Widgets/TPOWids/tpo_home_button.dart';
-import 'package:app_crt/custom_clip.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:app_crt/custom_shape.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TPOHomeScreen extends ConsumerWidget {
@@ -27,12 +25,8 @@ class TPOHomeScreen extends ConsumerWidget {
             const TPOHomeBut(text: 'Marks', onTap: ConstIndex.marksNotesIndex),
             const SizedBox(height: 20),
             CustomPaint(
-              painter: MyCustomPainter(),
-              child: Container(
-                height: 30,
-                width: 30,
-                color: Colors.yellow,
-              ),
+              size: const Size(20, 20),
+              painter: MyCustomPainter(color: Colors.yellow),
             ),
           ],
         ),

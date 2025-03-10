@@ -2,7 +2,7 @@ import "package:app_crt/Common/Constants/names.dart";
 import "package:app_crt/Common/Widgets/text_field.dart";
 import "package:app_crt/Providers/announcement_provider.dart";
 import "package:app_crt/Providers/login_info.dart";
-import "package:app_crt/custom_clip.dart";
+import "package:app_crt/custom_shape.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
@@ -163,12 +163,8 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
                             top: 12,
                             right: 339,
                             child: CustomPaint(
-                              painter: MyCustomPainter(),
-                              child: Container(
-                                height: 30,
-                                width: 30,
-                                color: tileColor,
-                              ),
+                              size: const Size(20, 20),
+                              painter: MyCustomPainter(color: tileColor),
                             ),
                           )
                         ],
