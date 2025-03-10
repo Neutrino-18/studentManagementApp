@@ -15,19 +15,15 @@ class TPOHomeScreen extends ConsumerWidget {
         title: const Text('CAMPUS CONNECT'),
         elevation: 0,
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const TPOHomeBut(
+            TPOHomeBut(
                 text: 'Attendance', onTap: ConstIndex.profileAttendanceIndex),
-            const SizedBox(height: 20),
-            const TPOHomeBut(text: 'Marks', onTap: ConstIndex.marksNotesIndex),
-            const SizedBox(height: 20),
-            CustomPaint(
-              size: const Size(20, 20),
-              painter: MyCustomPainter(color: Colors.yellow),
-            ),
+            SizedBox(height: 20),
+            TPOHomeBut(text: 'Score', onTap: ConstIndex.marksNotesIndex),
+            SizedBox(height: 20),
           ],
         ),
       ),

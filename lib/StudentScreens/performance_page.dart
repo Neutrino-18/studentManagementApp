@@ -3,7 +3,6 @@ import 'package:app_crt/Providers/index_provider.dart';
 import 'package:app_crt/Providers/student_data_provider.dart';
 import 'package:app_crt/Widgets/StudentWids/performance_table.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const List<PerformanceData> ifEmpty = [];
@@ -53,8 +52,10 @@ class StudentPerformance extends ConsumerWidget {
                               "Batch Name:", studentData.batchName),
                           buildAlignedText(
                               "Score:", studentData.score.toString()),
-                          buildAlignedText("HR Interviewer:",
-                              studentData.hrPerform.first.interviewer),
+                          buildAlignedText(
+                              "HR Interviewer:",
+                              studentData.hrPerform.first.interviewerName ??
+                                  ""),
                           buildAlignedText(
                               "Phase:", studentData.phase.toString()),
                         ],
@@ -104,13 +105,13 @@ class StudentPerformance extends ConsumerWidget {
             width: 120,
             child: Text(
               label,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
           Expanded(
             child: Text(
               value,
-              style: TextStyle(color: Colors.black87),
+              style: const TextStyle(color: Colors.black87),
             ),
           ),
         ],

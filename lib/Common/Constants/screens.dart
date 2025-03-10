@@ -5,7 +5,7 @@ import 'package:app_crt/StudentScreens/performance_page.dart';
 import 'package:app_crt/StudentScreens/profile_page.dart';
 import 'package:app_crt/TPOInstructorInterviewer/TPO/tpo_home.dart';
 import 'package:app_crt/TPOInstructorInterviewer/attendance_screen.dart';
-import 'package:app_crt/TPOInstructorInterviewer/marks_screen.dart';
+import 'package:app_crt/TPOInstructorInterviewer/score_screen.dart';
 import 'package:flutter/material.dart';
 
 //STUDENTS
@@ -31,7 +31,7 @@ final List<Widget> tpoScreens = [
   const SecondScreen(),
   const ThirdScreen(),
   const AttendenceScreen(),
-  const MarksScreen(),
+  const ScoreScreen(),
 ];
 
 const List<BottomNavigationBarItem> tpoItems = [

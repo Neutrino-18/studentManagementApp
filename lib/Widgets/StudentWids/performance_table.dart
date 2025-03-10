@@ -76,10 +76,10 @@ class DataTableData extends StatelessWidget {
       rows: tableData.map((data) {
         return DataRow(
           cells: [
-            DataCell(Text(tableData.first.round)),
+            DataCell(Text(tableData.first.round ?? "Not Available")),
             DataCell(Text(tableData.first.score.toString())),
-            DataCell(Text(tableData.first.date)),
-            DataCell(Text(tableData.first.remark)),
+            DataCell(Text(tableData.first.date ?? "Not Available")),
+            DataCell(Text(tableData.first.remark ?? "Not Available")),
           ],
         );
       }).toList(),
