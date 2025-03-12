@@ -23,7 +23,8 @@ class TPOHomeScreen extends ConsumerWidget {
             const TPOHomeBut(
                 text: 'Attendance', onTap: ConstIndex.profileAttendanceIndex),
             const SizedBox(height: 20),
-            if (ref.read(loginProvider).role == NavigationConsts.tpoRole)
+            if (ref.read(loginProvider).role ==
+                NavigationConsts.interviewerRole)
               const TPOHomeBut(
                   text: 'Score', onTap: ConstIndex.marksNotesIndex),
             const SizedBox(height: 20),

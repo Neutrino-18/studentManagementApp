@@ -20,7 +20,7 @@ class AnnouncementNotifier extends AsyncNotifier<List<Announcement>> {
     state = const AsyncValue.loading();
     try {
       /* calling and awaiting the poster */
-      await announcementGiver.postAnnouncements(announcement, id!);
+      await announcementGiver.postAnnouncements(announcement, id);
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
     }

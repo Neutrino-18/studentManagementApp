@@ -9,6 +9,7 @@ class ScoreScreen extends ConsumerWidget {
   @override
   Widget build(context, WidgetRef ref) {
     final allStudents = ref.watch(allStudentProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Score"),

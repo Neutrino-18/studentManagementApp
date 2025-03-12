@@ -1,4 +1,5 @@
 import 'package:app_crt/Providers/index_provider.dart';
+import 'package:app_crt/Providers/interviewer_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,6 +14,7 @@ class TPOHomeBut extends ConsumerWidget {
     return GestureDetector(
       onTap: () {
         ref.read(historyProvider.notifier).updateIndex(onTap, ref);
+        ref.read(interviewerDataProvider);
       },
       child: Stack(
         children: [
@@ -28,8 +30,7 @@ class TPOHomeBut extends ConsumerWidget {
               child: Text(
                 text,
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    color: Theme.of(context).colorScheme.background,
-                    fontSize: 30),
+                    color: Theme.of(context).colorScheme.surface, fontSize: 30),
               ),
             ),
           ),

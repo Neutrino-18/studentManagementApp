@@ -11,15 +11,15 @@ class AllStudentsHelper {
 
       final response = await http.get(url);
       if (response.statusCode == 200) {
-        print("Response is : ${response.body}");
+        // print("Response is : ${response.body}");
         final data = studentListFromJson(jsonDecode(response.body));
 
         return data;
       } else {
-        throw Exception("Failed to load!!");
+        throw Exception("Failed to load!! ${response.statusCode}");
       }
     } catch (e) {
-      debugPrint('Request Failed $e');
+      debugPrint('Request Failed in AllStudentsHelper $e');
       return [];
     }
   }
