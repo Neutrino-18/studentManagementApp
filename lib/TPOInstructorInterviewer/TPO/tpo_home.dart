@@ -1,5 +1,7 @@
 import 'package:app_crt/Common/Constants/indexes.dart';
+import 'package:app_crt/Common/Constants/names.dart';
 import 'package:app_crt/Providers/index_provider.dart';
+import 'package:app_crt/Providers/login_info.dart';
 import 'package:app_crt/Widgets/TPOWids/tpo_home_button.dart';
 import 'package:app_crt/custom_shape.dart';
 import 'package:flutter/material.dart';
@@ -15,15 +17,17 @@ class TPOHomeScreen extends ConsumerWidget {
         title: const Text('CAMPUS CONNECT'),
         elevation: 0,
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TPOHomeBut(
+            const TPOHomeBut(
                 text: 'Attendance', onTap: ConstIndex.profileAttendanceIndex),
-            SizedBox(height: 20),
-            TPOHomeBut(text: 'Score', onTap: ConstIndex.marksNotesIndex),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
+            if (ref.read(loginProvider).role == NavigationConsts.tpoRole)
+              const TPOHomeBut(
+                  text: 'Score', onTap: ConstIndex.marksNotesIndex),
+            const SizedBox(height: 20),
           ],
         ),
       ),

@@ -28,7 +28,8 @@ class _IconFooterState extends ConsumerState<IconFooter> {
     print("historyCare:  $historyCare");
 
     if (loginDetails.role == NavigationConsts.tpoRole ||
-        loginDetails.role == NavigationConsts.instructorRole) {
+        loginDetails.role == NavigationConsts.instructorRole ||
+        loginDetails.role == NavigationConsts.interviewerRole) {
       _screens = tpoScreens;
       _items = tpoItems;
       _currentIndex = tabIndex > ConstIndex.batchIndex ? 0 : tabIndex;

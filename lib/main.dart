@@ -27,10 +27,10 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.selfTheme,
       darkTheme: AppTheme.selfDarkTheme,
       home: const ProviderScope(child: LoginPage()),
-      routes: {
-        NavigationConsts.destStudentHome: (context) => const IconFooter(),
-        NavigationConsts.destTpoHome: (context) => const IconFooter(),
-      },
+      // routes: {
+      //   NavigationConsts.destStudentHome: (context) => const IconFooter(),
+      //   NavigationConsts.destTpoHome: (context) => const IconFooter(),
+      // },
     );
   }
 }
