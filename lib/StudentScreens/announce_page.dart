@@ -18,7 +18,7 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
   final _scrollController = ScrollController();
 
   void _validatAnnouncement(String announcement) {
-    final textColor = Theme.of(context).colorScheme.onBackground;
+    final textColor = Theme.of(context).colorScheme.onSurface;
     final asyncValue = ref.read(announcementProvider);
     final isLoading = asyncValue.isLoading;
     showDialog(
@@ -86,7 +86,7 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
   }
 
   Future<void> _refresh() async {
-    ref.refresh(announcementProvider);
+    final _ = ref.refresh(announcementProvider);
     await Future.delayed(const Duration(milliseconds: 50));
     _scrollToBottom();
   }
@@ -153,7 +153,7 @@ class _SecondScreenState extends ConsumerState<SecondScreen> {
                                     .copyWith(
                                         color: Theme.of(context)
                                             .colorScheme
-                                            .background),
+                                            .surface),
 
                                 // textAlign: TextAlign.center,
                               ),

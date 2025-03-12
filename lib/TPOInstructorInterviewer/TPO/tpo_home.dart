@@ -3,7 +3,6 @@ import 'package:app_crt/Common/Constants/names.dart';
 import 'package:app_crt/Providers/index_provider.dart';
 import 'package:app_crt/Providers/login_info.dart';
 import 'package:app_crt/Widgets/TPOWids/tpo_home_button.dart';
-import 'package:app_crt/custom_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -41,7 +40,7 @@ class TPOHomeScreen extends ConsumerWidget {
         elevation: 10,
         child: Icon(
           Icons.chat,
-          color: Theme.of(context).colorScheme.background,
+          color: Theme.of(context).colorScheme.surface,
         ),
       ),
     );
