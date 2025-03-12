@@ -1,5 +1,7 @@
 import 'package:app_crt/Providers/all_students_provider.dart';
 import 'package:app_crt/Providers/index_provider.dart';
+import 'package:app_crt/StudentScreens/performance_page.dart';
+import 'package:app_crt/TPOInstructorInterviewer/individual_score.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,6 +10,7 @@ class ScoreScreen extends ConsumerWidget {
 
   @override
   Widget build(context, WidgetRef ref) {
+    print("Built Score Screen");
     final allStudents = ref.watch(allStudentProvider);
 
     return Scaffold(
@@ -21,10 +24,20 @@ class ScoreScreen extends ConsumerWidget {
         ),
       ),
       body: allStudents.when(
-        data: (data) => ListView.builder(
-          itemCount: data.length,
-          itemBuilder: (context, index) => ListTile(
-            title: Text(data[index].name),
+        data: (students) => ListView.builder(
+          itemCount: students.length,
+          itemBuilder: (context, index) => GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        StudentScore(studentData: students[index]),
+                  ));
+            },
+            child: ListTile(
+              title: Text(students[index].name),
+            ),
           ),
         ),
         error: (error, stackTrace) => Center(

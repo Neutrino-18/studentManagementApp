@@ -5,7 +5,7 @@ import 'package:app_crt/Widgets/StudentWids/performance_table.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-const List<PerformanceData> ifEmpty = [];
+const List<PerformanceData> _ifEmpty = [];
 
 const String hrTableTitle = "HR Performance";
 const String gdTableTitle = "GD Performance";
@@ -66,20 +66,20 @@ class StudentPerformance extends ConsumerWidget {
                   DropdownTableWidget(
                     dropDownTitle: hrTableTitle,
                     tableData: studentData.hrPerform.isEmpty
-                        ? ifEmpty
+                        ? _ifEmpty
                         : studentData.hrPerform,
                     index: 0,
                   ),
                   DropdownTableWidget(
                     tableData: studentData.gdPerform.isEmpty
-                        ? ifEmpty
+                        ? _ifEmpty
                         : studentData.gdPerform,
                     dropDownTitle: gdTableTitle,
                     index: 1,
                   ),
                   DropdownTableWidget(
                     tableData: studentData.techPerform.isEmpty
-                        ? ifEmpty
+                        ? _ifEmpty
                         : studentData.techPerform,
                     dropDownTitle: techTableTitle,
                     index: 2,

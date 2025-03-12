@@ -1,5 +1,4 @@
 import 'package:app_crt/Providers/index_provider.dart';
-import 'package:app_crt/Providers/interviewer_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,9 +11,8 @@ class TPOHomeBut extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         ref.read(historyProvider.notifier).updateIndex(onTap, ref);
-        ref.read(interviewerDataProvider);
       },
       child: Stack(
         children: [

@@ -55,10 +55,10 @@ class StudentModel {
       techPerform: (json['tech_performance_data'] as List)
           .map((e) => PerformanceData.fromJson(e))
           .toList(),
-      gdPerform: (json['hr_performance_data'] as List)
+      gdPerform: (json['GD_Extemopore_performance_data'] as List)
           .map((e) => PerformanceData.fromJson(e))
           .toList(),
-      hrPerform: (json['GD_Extemopore_performance_data'] as List)
+      hrPerform: (json['hr_performance_data'] as List)
           .map((e) => PerformanceData.fromJson(e))
           .toList(),
     );
