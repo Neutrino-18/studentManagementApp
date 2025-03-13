@@ -1,5 +1,6 @@
 import 'package:app_crt/Providers/all_students_provider.dart';
 import 'package:app_crt/Providers/index_provider.dart';
+import 'package:app_crt/Providers/interviewer_data_provider.dart';
 import 'package:app_crt/TPOInstructorInterviewer/individual_score.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,15 +25,22 @@ class ScoreScreen extends ConsumerWidget {
       ),
       body: allStudents.when(
         data: (students) => ListView.builder(
+          physics: BouncingScrollPhysics(),
           itemCount: students.length,
           itemBuilder: (context, index) => GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        StudentScore(studentData: students[index]),
-                  ));
+            onTap: () async {
+              final interviewer =
+                  await ref.read(interviewerDataProvider.future);
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => StudentScore(
+                    studentData: students[index],
+                    interviewerData: interviewer,
+                  ),
+                ),
+                (route) => false,
+              );
             },
             child: ListTile(
               title: Text(students[index].name),
@@ -42,7 +50,9 @@ class ScoreScreen extends ConsumerWidget {
         error: (error, stackTrace) => Center(
           child: Text("Error $error"),
         ),
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () => const Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
     );
   }

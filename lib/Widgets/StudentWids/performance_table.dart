@@ -18,7 +18,7 @@ class DropdownTableWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isToggled = ref.watch(performButProvider)[index] ?? false;
     return Card(
-      margin: const EdgeInsets.all(16.0),
+      // margin: const EdgeInsets.all(16.0),
       elevation: 4,
       child: Column(
         // mainAxisSize: MainAxisSize.min,
@@ -38,22 +38,19 @@ class DropdownTableWidget extends ConsumerWidget {
                   Text(
                     dropDownTitle,
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.background,
+                      color: Theme.of(context).colorScheme.surface,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Icon(isToggled ? Icons.expand_less : Icons.expand_more,
-                      color: Theme.of(context).colorScheme.background),
+                      color: Theme.of(context).colorScheme.surface),
                 ],
               ),
             ),
           ),
           if (isToggled)
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: DataTableData(
-                tableData: tableData,
-              ),
+            DataTableData(
+              tableData: tableData,
             ),
         ],
       ),
@@ -67,6 +64,7 @@ class DataTableData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DataTable(
+      columnSpacing: 30,
       columns: [
         dataColumn(context, "Round"),
         dataColumn(context, "Score"),
@@ -76,10 +74,14 @@ class DataTableData extends StatelessWidget {
       rows: tableData.map((data) {
         return DataRow(
           cells: [
-            DataCell(Text(tableData.first.round ?? "Not Available")),
+            DataCell(Text(tableData.first.round ?? "Currently Not Displayed")),
             DataCell(Text(tableData.first.score.toString())),
-            DataCell(Text(tableData.first.date ?? "Not Available")),
-            DataCell(Text(tableData.first.remark ?? "Not Available")),
+            DataCell(Text(tableData.first.date ?? "Currently Not Displayed")),
+            DataCell(Text(
+              tableData.first.remark ?? "Currently Not Displayed",
+              maxLines: 2,
+              overflow: TextOverflow.fade,
+            )),
           ],
         );
       }).toList(),
@@ -91,7 +93,7 @@ class DataTableData extends StatelessWidget {
         label: Text(label,
             style: Theme.of(context)
                 .textTheme
-                .titleLarge!
-                .copyWith(color: Theme.of(context).colorScheme.onBackground)));
+                .titleMedium!
+                .copyWith(color: Theme.of(context).colorScheme.onSurface)));
   }
 }

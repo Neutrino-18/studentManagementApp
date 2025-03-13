@@ -8,8 +8,7 @@ final myTextTheme = GoogleFonts.ebGaramondTextTheme();
 class AppTheme {
   /* Light Mode Color Pallete */
   static final kcolorScheme = const ColorScheme.light().copyWith(
-    background: const Color(0xffF7F7F7),
-    onBackground: const Color.fromARGB(209, 8, 9, 10),
+    onSurface: const Color.fromARGB(209, 8, 9, 10),
     primary: Colors.blue[800],
     secondary: Colors.grey[200],
     tertiary: const Color.fromARGB(197, 0, 140, 255),
@@ -18,15 +17,14 @@ class AppTheme {
 
   /* Light Mode Theme */
   static final selfTheme = ThemeData().copyWith(
-    scaffoldBackgroundColor: kcolorScheme.background,
+    scaffoldBackgroundColor: kcolorScheme.surface,
     colorScheme: kcolorScheme,
     iconButtonTheme: IconButtonThemeData(
       style: const ButtonStyle().copyWith(),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: const ButtonStyle().copyWith(
-            backgroundColor:
-                MaterialStatePropertyAll(kcolorScheme.background))),
+            backgroundColor: WidgetStatePropertyAll(kcolorScheme.surface))),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
         unselectedItemColor: kcolorScheme.primary.withOpacity(0.6),
         selectedItemColor: kcolorScheme.primary,
@@ -66,10 +64,9 @@ class AppTheme {
 
   /* Dark Mode Color Pallete */
   static const darkColorScheme = ColorScheme.dark(
-    background: Color(0xff121212),
-    onBackground: Color(0xfff5f6f6),
+    onSurface: Color(0xfff5f6f6),
     primary: Color.fromARGB(255, 62, 116, 202),
-    secondary: Color(0xff7CB9E8),
+    secondary: Color(0xff212d40),
     surface: Color(0xff121212),
     error: Color(0xffCF6679),
     brightness: Brightness.dark,
@@ -77,10 +74,10 @@ class AppTheme {
 
   /* Dark Mode Theme */
   static final selfDarkTheme = ThemeData.dark().copyWith(
-    scaffoldBackgroundColor: darkColorScheme.background,
+    scaffoldBackgroundColor: darkColorScheme.surface,
     colorScheme: darkColorScheme,
     appBarTheme: const AppBarTheme().copyWith(
-      color: darkColorScheme.background,
+      color: darkColorScheme.surface,
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData().copyWith(
       selectedItemColor: darkColorScheme.primary,

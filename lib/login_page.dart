@@ -55,8 +55,7 @@ class LoginPageState extends ConsumerState<LoginPage> {
     final loginWatcher = ref.watch(loginProvider);
     return Scaffold(
       body: Container(
-        decoration:
-            BoxDecoration(color: Theme.of(context).colorScheme.background),
+        decoration: BoxDecoration(color: Theme.of(context).colorScheme.surface),
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(24.0),
@@ -65,7 +64,7 @@ class LoginPageState extends ConsumerState<LoginPage> {
               children: [
                 Text("Sign In \n         To Win",
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: Theme.of(context).colorScheme.onBackground)),
+                        color: Theme.of(context).colorScheme.onSurface)),
                 const SizedBox(height: 20),
                 Form(
                   key: formKey,
@@ -112,8 +111,8 @@ class LoginPageState extends ConsumerState<LoginPage> {
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(
-                            Theme.of(context).colorScheme.onBackground)),
+                        backgroundColor: WidgetStatePropertyAll(
+                            Theme.of(context).colorScheme.onSurface)),
                     onPressed: () async {
                       await _validateLogin(emailController.text.trimRight(),
                           passwordController.text.trimRight());
@@ -122,9 +121,9 @@ class LoginPageState extends ConsumerState<LoginPage> {
                         ? CircularProgressIndicator(
                             backgroundColor: Theme.of(context)
                                 .colorScheme
-                                .background
+                                .surface
                                 .withOpacity(0.7),
-                            color: Theme.of(context).colorScheme.background,
+                            color: Theme.of(context).colorScheme.surface,
                           )
                         : Text(
                             "Login",

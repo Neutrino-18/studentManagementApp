@@ -1,14 +1,18 @@
 class NavigationConsts {
+  NavigationConsts._();
   // Roles
   static const studentRole = "student";
   static const tpoRole = "tpo";
   static const instructorRole = "instructor";
   static const interviewerRole = "interviewer";
-
-  // Destinations according to the role
-  // static const destStudentHome = "/studentHome";
-  // static const destTpoHome = "/tpoHome";
-  // static const destInstructorHome = "/tpoHome";
 }
 
-enum Roles { student, tpo, instructor, editor }
+class SubjectCategory {
+  SubjectCategory._();
+
+  static const tech = "Tech";
+  static const gdExtempore = "Gd_extempore";
+  static const hr = "Hr";
+}
+
+// enum Roles { student, tpo, instructor, editor }
