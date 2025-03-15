@@ -11,11 +11,6 @@ class TPOHomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
-    print('Width is : $width');
-    print('Height is : $height  ');
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('CAMPUS CONNECT'),
@@ -40,7 +35,7 @@ class TPOHomeScreen extends ConsumerWidget {
         onPressed: () {
           ref
               .read(historyProvider.notifier)
-              .updateIndex(ConstIndex.announcementIndex, ref);
+              .updateIndex(ConstIndex.announcementIndex);
         },
         backgroundColor: Theme.of(context).colorScheme.primary,
         elevation: 10,

@@ -11,8 +11,11 @@ class TPOHomeBut extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
+      // onDoubleTap: () {
+      //   ref.read(historyProvider.notifier).updateIndex(2);
+      // },
       onTap: () async {
-        ref.read(historyProvider.notifier).updateIndex(onTap, ref);
+        ref.read(historyProvider.notifier).updateIndex(onTap);
       },
       child: Stack(
         children: [

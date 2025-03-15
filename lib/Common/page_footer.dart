@@ -42,7 +42,7 @@ class _IconFooterState extends ConsumerState<IconFooter> {
     return PopScope(
       canPop: historyCare.length == 1 ? true : false,
       onPopInvoked: (didPop) {
-        ref.read(historyProvider.notifier).onPopInvoked(ref);
+        ref.read(historyProvider.notifier).onPopInvoked();
       },
       child: Scaffold(
         body: IndexedStack(
@@ -53,7 +53,7 @@ class _IconFooterState extends ConsumerState<IconFooter> {
             type: BottomNavigationBarType.shifting,
             currentIndex: _currentIndex,
             onTap: (index) {
-              ref.read(historyProvider.notifier).updateIndex(index, ref);
+              ref.read(historyProvider.notifier).updateIndex(index);
             },
             showSelectedLabels: false,
             showUnselectedLabels: true,

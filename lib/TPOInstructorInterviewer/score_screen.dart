@@ -19,7 +19,7 @@ class ScoreScreen extends ConsumerWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () {
-            ref.read(historyProvider.notifier).updateIndex(0, ref);
+            ref.read(historyProvider.notifier).updateIndex(0);
           },
         ),
       ),
@@ -39,7 +39,7 @@ class ScoreScreen extends ConsumerWidget {
                     interviewerData: interviewer,
                   ),
                 ),
-                (route) => false,
+                (route) => true,
               );
             },
             child: ListTile(

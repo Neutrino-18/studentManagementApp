@@ -2,12 +2,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final indexProvider = StateProvider<int>((ref) => 0);
 final historyProvider = StateNotifierProvider<HistoryIndexNotifier, List<int>>(
-    (ref) => HistoryIndexNotifier());
+    (ref) => HistoryIndexNotifier(ref));
 
 class HistoryIndexNotifier extends StateNotifier<List<int>> {
-  HistoryIndexNotifier() : super([0]);
+  final Ref ref;
+  HistoryIndexNotifier(this.ref) : super([0]);
 
-  void updateIndex(int index, WidgetRef ref) {
+  void updateIndex(int index) {
     if (index != ref.read(indexProvider)) {
       state = [...state, index];
       ref.read(indexProvider.notifier).state = index;
@@ -18,7 +19,7 @@ class HistoryIndexNotifier extends StateNotifier<List<int>> {
     }
   }
 
-  bool onPopInvoked(WidgetRef ref) {
+  bool onPopInvoked() {
     if (state.last == 0) {
       state = [0];
     }

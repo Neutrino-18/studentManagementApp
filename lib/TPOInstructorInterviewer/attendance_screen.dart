@@ -15,7 +15,7 @@ class AttendenceScreen extends ConsumerWidget {
             onPressed: () {
               ref
                   .read(historyProvider.notifier)
-                  .updateIndex(ConstIndex.defaultIndex, ref);
+                  .updateIndex(ConstIndex.defaultIndex);
             },
             icon: const Icon(Icons.arrow_back_ios_new)),
       ),
