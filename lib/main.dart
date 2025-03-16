@@ -1,4 +1,5 @@
 import 'package:app_crt/login_page.dart';
+import 'package:app_crt/test_field.dart';
 import "package:flutter/material.dart";
 import 'package:app_crt/theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.selfTheme,
       darkTheme: AppTheme.selfDarkTheme,
-      home: const ProviderScope(child: LoginPage()),
+      home: const ProviderScope(child: TestField()),
       // routes: {
       //   NavigationConsts.destStudentHome: (context) => const IconFooter(),
       //   NavigationConsts.destTpoHome: (context) => const IconFooter(),
