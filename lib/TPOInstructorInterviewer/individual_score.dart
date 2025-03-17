@@ -1,12 +1,13 @@
 import 'package:app_crt/Common/Constants/names.dart';
 import 'package:app_crt/Modals/interviewer.dart';
 import 'package:app_crt/Modals/student_model.dart';
-import 'package:app_crt/StudentScreens/performance_page.dart';
+import 'package:app_crt/Providers/single_student_data.dart';
 import 'package:app_crt/Widgets/StudentWids/performance_table.dart';
 import 'package:app_crt/student_score_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class StudentScore extends StatelessWidget {
+class StudentScore extends ConsumerStatefulWidget {
   const StudentScore(
       {super.key, required this.studentData, required this.interviewerData});
 
@@ -14,27 +15,33 @@ class StudentScore extends StatelessWidget {
   final Interviewer interviewerData;
 
   @override
-  Widget build(BuildContext context) {
-    final Map<Map<IconData, String>, List<PerformanceData>> interviewerInfo = {
-      {Icons.group: "GD/Extempore"}: studentData.gdPerform,
-      {Icons.man: "Hr"}: studentData.hrPerform,
-    };
-    Map<IconData, String> some = {
-      Icons.computer: "Tech",
-    };
-    List<PerformanceData> something = studentData.techPerform;
+  ConsumerState<StudentScore> createState() => _StudentScoreState();
+}
 
-    if (interviewerData.subject == SubjectCategory.gdExtempore) {
-      some = interviewerInfo.keys.first;
-      something = interviewerInfo.values.first;
-    } else if (interviewerData.subject == SubjectCategory.hr) {
-      some = interviewerInfo.keys.last;
-      something = interviewerInfo.values.last;
-    }
-    const List<PerformanceData> ifEmpty = [];
+class _StudentScoreState extends ConsumerState<StudentScore> {
+  late List<PerformanceData> studentPerformanceData;
+  late String focusedTab;
+  IconData icon = Icons.computer;
+
+  @override
+  void initState() {
+    super.initState();
+    final some = ref.read(singleStudentDataProvider);
+    studentPerformanceData = some.values.first;
+    focusedTab = some.keys.first;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    icon = focusedTab == SubjectCategory.gdExtempore
+        ? Icons.group
+        : focusedTab == SubjectCategory.hr
+            ? Icons.man
+            : icon;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(studentData.name),
+        title: Text(widget.studentData.name),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -60,12 +67,12 @@ class StudentScore extends StatelessWidget {
                       dividerColor: Colors.transparent,
                       tabs: [
                         Tab(
-                          icon: Icon(some.keys.single),
-                          text: some.values.single,
+                          icon: Icon(icon),
+                          text: focusedTab,
                         ),
                         const Tab(
                           icon: Icon(Icons.edit),
-                          text: "Enter Marks",
+                          text: "Enter Results",
                         ),
                       ],
                     ),
@@ -78,11 +85,12 @@ class StudentScore extends StatelessWidget {
                                 horizontal: 10, vertical: 40),
                             child: DropdownTableWidget(
                                 dropDownTitle: 'Current Performance',
-                                tableData:
-                                    something.isEmpty ? ifEmpty : something,
+                                tableData: studentPerformanceData,
                                 index: 0),
                           ),
-                          const StudentScoreTestField(),
+                          StudentScoreTestField(
+                            onPressed: () {},
+                          ),
                         ],
                       ),
                     ),

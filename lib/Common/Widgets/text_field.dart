@@ -77,6 +77,7 @@ class MyTextField extends StatelessWidget {
       this.keyboardType,
       this.obscureText = false,
       this.onSubmitted,
+      this.autoFillHints,
       this.onTap});
 
   final TextEditingController? textEditingController;
@@ -85,6 +86,7 @@ class MyTextField extends StatelessWidget {
   final String? hintText;
   final TextInputType? keyboardType;
   final bool obscureText;
+  final Iterable<String>? autoFillHints;
   final void Function(String)? onSubmitted;
   final void Function()? onTap;
   @override
@@ -97,6 +99,7 @@ class MyTextField extends StatelessWidget {
       onSubmitted: onSubmitted,
       obscureText: obscureText,
       controller: textEditingController,
+      autofillHints: autoFillHints,
       decoration: InputDecoration(
         focusColor: myColor,
         labelText: labelText,

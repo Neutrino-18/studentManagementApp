@@ -1,6 +1,7 @@
 import 'package:app_crt/Providers/all_students_provider.dart';
 import 'package:app_crt/Providers/index_provider.dart';
 import 'package:app_crt/Providers/interviewer_data_provider.dart';
+import 'package:app_crt/Providers/single_student_data.dart';
 import 'package:app_crt/TPOInstructorInterviewer/individual_score.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,12 +26,15 @@ class ScoreScreen extends ConsumerWidget {
       ),
       body: allStudents.when(
         data: (students) => ListView.builder(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           itemCount: students.length,
           itemBuilder: (context, index) => GestureDetector(
             onTap: () async {
               final interviewer =
                   await ref.read(interviewerDataProvider.future);
+              ref
+                  .read(singleStudentDataProvider.notifier)
+                  .getStudentPerformance(students[index], interviewer);
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(

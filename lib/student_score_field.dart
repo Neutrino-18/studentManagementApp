@@ -2,7 +2,17 @@ import 'package:app_crt/Common/Widgets/text_field.dart';
 import 'package:flutter/material.dart';
 
 class StudentScoreTestField extends StatelessWidget {
-  const StudentScoreTestField({super.key});
+  const StudentScoreTestField(
+      {super.key,
+      required this.onPressed,
+      this.controller1,
+      this.controller2,
+      this.controller3});
+
+  final VoidCallback onPressed;
+  final TextEditingController? controller1;
+  final TextEditingController? controller2;
+  final TextEditingController? controller3;
 
   @override
   Widget build(BuildContext context) {
@@ -20,22 +30,26 @@ class StudentScoreTestField extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            const MyTextField(
+            MyTextField(
               hintText: 'How much he/she scored?',
               labelText: 'Enter Score',
               keyboardType: TextInputType.number,
+              textEditingController: controller1,
             ),
             const SizedBox(
               height: 10,
             ),
-            const MyTextField(
+            MyTextField(
+              textEditingController: controller2,
               hintText: 'How did he/she performed?',
               labelText: 'Enter Remarks',
             ),
             const SizedBox(
               height: 10,
             ),
-            const MyTextField(
+            MyTextField(
+              textEditingController: controller3,
+              autoFillHints: [1.toString(), 2.toString(), 3.toString()],
               keyboardType: TextInputType.number,
               hintText: '1, 2 or 3 ',
               labelText: 'Enter Round',
@@ -44,7 +58,7 @@ class StudentScoreTestField extends StatelessWidget {
               height: 10,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: onPressed,
               child: Container(
                 height: 45,
                 width: 100,
