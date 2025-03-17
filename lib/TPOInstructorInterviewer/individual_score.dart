@@ -3,6 +3,7 @@ import 'package:app_crt/Modals/interviewer.dart';
 import 'package:app_crt/Modals/student_model.dart';
 import 'package:app_crt/StudentScreens/performance_page.dart';
 import 'package:app_crt/Widgets/StudentWids/performance_table.dart';
+import 'package:app_crt/student_score_field.dart';
 import 'package:flutter/material.dart';
 
 class StudentScore extends StatelessWidget {
@@ -43,13 +44,13 @@ class StudentScore extends StatelessWidget {
               height: 170,
               width: double.infinity,
               color: Theme.of(context).colorScheme.secondary,
-              child: Text("Hello"),
+              child: const Text("Hello"),
             ),
             const SizedBox(
               height: 20,
             ),
             DefaultTabController(
-              animationDuration: Duration(milliseconds: 300),
+              animationDuration: const Duration(milliseconds: 300),
               length: 2,
               child: Expanded(
                 child: Column(
@@ -62,7 +63,7 @@ class StudentScore extends StatelessWidget {
                           icon: Icon(some.keys.single),
                           text: some.values.single,
                         ),
-                        Tab(
+                        const Tab(
                           icon: Icon(Icons.edit),
                           text: "Enter Marks",
                         ),
@@ -70,14 +71,18 @@ class StudentScore extends StatelessWidget {
                     ),
                     Expanded(
                       child: TabBarView(
-                        physics: PageScrollPhysics(),
+                        physics: const PageScrollPhysics(),
                         children: [
-                          DropdownTableWidget(
-                              dropDownTitle: 'Current Performance',
-                              tableData:
-                                  something.isEmpty ? ifEmpty : something,
-                              index: 0),
-                          Text('nig'),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 40),
+                            child: DropdownTableWidget(
+                                dropDownTitle: 'Current Performance',
+                                tableData:
+                                    something.isEmpty ? ifEmpty : something,
+                                index: 0),
+                          ),
+                          const StudentScoreTestField(),
                         ],
                       ),
                     ),

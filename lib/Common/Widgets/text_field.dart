@@ -20,7 +20,7 @@ class MyTextFormField extends StatelessWidget {
   final void Function(String)? onFieldSubmitted;
   @override
   Widget build(BuildContext context) {
-    final myColor = Theme.of(context).colorScheme.onBackground;
+    final myColor = Theme.of(context).colorScheme.onSurface;
     final borderRadius = BorderRadius.circular(20);
     return TextFormField(
       style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: myColor),
@@ -89,7 +89,7 @@ class MyTextField extends StatelessWidget {
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
-    final myColor = Theme.of(context).colorScheme.onBackground;
+    final myColor = Theme.of(context).colorScheme.onSurface;
     final borderRadius = BorderRadius.circular(10);
     return TextField(
       style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: myColor),
