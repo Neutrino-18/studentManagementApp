@@ -23,6 +23,9 @@ class _StudentScoreState extends ConsumerState<StudentScore> {
   late List<PerformanceData> studentPerformanceData;
   late String focusedTab;
   IconData icon = Icons.computer;
+  final remarkController = TextEditingController();
+  final roundNumberController = TextEditingController();
+  final scoreController = TextEditingController();
 
   @override
   void initState() {
@@ -39,7 +42,6 @@ class _StudentScoreState extends ConsumerState<StudentScore> {
         : focusedTab == SubjectCategory.hr
             ? Icons.man
             : icon;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.studentData.name),
@@ -90,8 +92,18 @@ class _StudentScoreState extends ConsumerState<StudentScore> {
                                 index: 0),
                           ),
                           StudentScoreTestField(
+                            remarkController: remarkController,
+                            roundController: roundNumberController,
+                            scoreController: scoreController,
                             onPressed: () {
-                              ref.read(singleStudentDataProvider.notifier).getStudentPerformance(studentData, interviewerData)
+                              ref
+                                  .read(studenDataPostProvider.notifier)
+                                  .scorePoster(
+                                      widget.studentData.uniqueStudentId,
+                                      widget.interviewerData.name,
+                                      remarkController.text,
+                                      roundNumberController.text,
+                                      scoreController.text);
                             },
                           ),
                         ],

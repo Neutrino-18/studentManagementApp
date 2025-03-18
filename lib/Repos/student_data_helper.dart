@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class StudentHelper {
-  Future<StudentModel?> fetchAnnouncements(String? studentId) async {
+  Future<StudentModel> fetchAnnouncements(String? studentId) async {
     try {
       final url = Uri.parse('${NetworkKeys.studentDataFetch}/"$studentId"');
 
@@ -20,7 +20,7 @@ class StudentHelper {
       }
     } catch (e) {
       print('Request Failed the error is : $e');
-      return null;
+      throw e.toString();
     }
   }
 }

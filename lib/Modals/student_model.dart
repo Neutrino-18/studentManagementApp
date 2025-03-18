@@ -1,3 +1,5 @@
+import 'package:app_crt/Modals/login.dart';
+
 class StudentModel {
   StudentModel({
     required this.id,
@@ -61,6 +63,46 @@ class StudentModel {
       hrPerform: (json['hr_performance_data'] as List)
           .map((e) => PerformanceData.fromJson(e))
           .toList(),
+    );
+  }
+
+  StudentModel copyWith({
+    int? id,
+    String? uniqueStudentId,
+    String? name,
+    String? email,
+    String? rollno,
+    String? branch,
+    String? batchId,
+    String? batchName,
+    int? attendance,
+    int? score,
+    String? tpoName,
+    int? tpo,
+    int? phase,
+    DateTime? stuCreatedAt,
+    List<PerformanceData>? techPerform,
+    List<PerformanceData>? gdPerform,
+    List<PerformanceData>? hrPerform,
+  }) {
+    return StudentModel(
+      id: id ?? this.id,
+      uniqueStudentId: uniqueStudentId ?? this.uniqueStudentId,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      rollno: rollno ?? this.rollno,
+      branch: branch ?? this.branch,
+      batchName: batchName ?? this.batchName,
+      batchId: batchId ?? this.batchId,
+      attendance: attendance ?? this.attendance,
+      score: score ?? this.score,
+      tpoName: tpoName ?? this.tpoName,
+      tpo: tpo ?? this.tpo,
+      phase: phase ?? this.phase,
+      stuCreatedAt: stuCreatedAt ?? this.stuCreatedAt,
+      techPerform: techPerform ?? this.techPerform,
+      gdPerform: gdPerform ?? this.gdPerform,
+      hrPerform: hrPerform ?? this.hrPerform,
     );
   }
 }

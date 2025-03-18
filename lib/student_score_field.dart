@@ -2,17 +2,18 @@ import 'package:app_crt/Common/Widgets/text_field.dart';
 import 'package:flutter/material.dart';
 
 class StudentScoreTestField extends StatelessWidget {
-  const StudentScoreTestField(
-      {super.key,
-      required this.onPressed,
-      this.controller1,
-      this.controller2,
-      this.controller3});
+  const StudentScoreTestField({
+    super.key,
+    required this.onPressed,
+    this.remarkController,
+    this.roundController,
+    this.scoreController,
+  });
 
   final VoidCallback onPressed;
-  final TextEditingController? controller1;
-  final TextEditingController? controller2;
-  final TextEditingController? controller3;
+  final TextEditingController? scoreController;
+  final TextEditingController? remarkController;
+  final TextEditingController? roundController;
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +35,13 @@ class StudentScoreTestField extends StatelessWidget {
               hintText: 'How much he/she scored?',
               labelText: 'Enter Score',
               keyboardType: TextInputType.number,
-              textEditingController: controller1,
+              textEditingController: scoreController,
             ),
             const SizedBox(
               height: 10,
             ),
             MyTextField(
-              textEditingController: controller2,
+              textEditingController: remarkController,
               hintText: 'How did he/she performed?',
               labelText: 'Enter Remarks',
             ),
@@ -48,7 +49,7 @@ class StudentScoreTestField extends StatelessWidget {
               height: 10,
             ),
             MyTextField(
-              textEditingController: controller3,
+              textEditingController: roundController,
               autoFillHints: [1.toString(), 2.toString(), 3.toString()],
               keyboardType: TextInputType.number,
               hintText: '1, 2 or 3 ',
