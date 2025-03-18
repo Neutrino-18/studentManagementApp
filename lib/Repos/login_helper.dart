@@ -10,7 +10,7 @@ class LoginHelper {
     try {
       final response = await http
           .post(
-            Uri.parse(loginFetch),
+            Uri.parse(NetworkKeys.loginFetch),
             headers: {"content-type": "application/json"},
             body: jsonEncode(
               {"email": email, "password": rollno},

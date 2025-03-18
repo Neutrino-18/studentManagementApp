@@ -7,7 +7,7 @@ import 'dart:convert';
 class AllStudentsHelper {
   Future<List<StudentModel>> fetchAllStudents() async {
     try {
-      final url = Uri.parse(allStudentFetch);
+      final url = Uri.parse(NetworkKeys.allStudentFetch);
 
       final response = await http.get(url);
       if (response.statusCode == 200) {

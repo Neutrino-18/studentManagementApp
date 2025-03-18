@@ -7,7 +7,7 @@ class AnnouncementHelper {
   /* fetching the announcements from the server */
   Future<List<Announcement>> fetchAnnouncements() async {
     try {
-      final url = Uri.parse(announcementFetch);
+      final url = Uri.parse(NetworkKeys.announcementFetch);
 
       final response = await http.get(url);
       if (response.statusCode == 200) {
@@ -25,7 +25,7 @@ class AnnouncementHelper {
   /* posting the announcements to the server */
   Future<void> postAnnouncements(String announcement, String id) async {
     try {
-      final url = Uri.parse(announcementPost);
+      final url = Uri.parse(NetworkKeys.announcementPost);
 
       final response = await http.post(
         url,

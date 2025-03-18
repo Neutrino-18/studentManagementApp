@@ -6,7 +6,7 @@ import 'dart:convert';
 class StudentHelper {
   Future<StudentModel?> fetchAnnouncements(String? studentId) async {
     try {
-      final url = Uri.parse('$studentDataFetch/"$studentId"');
+      final url = Uri.parse('${NetworkKeys.studentDataFetch}/"$studentId"');
 
       final response = await http.get(url);
       // print(response.statusCode);

@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class InterviewerHelper {
   Future<Interviewer> fetchInterviewer(String interId) async {
     try {
-      final url = Uri.parse('$allInterviewerFetch$interId');
+      final url = Uri.parse('${NetworkKeys.allInterviewerFetch}$interId');
 
       final response = await http.get(url);
       if (response.statusCode == 200) {

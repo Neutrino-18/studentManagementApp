@@ -2,6 +2,7 @@ import 'package:app_crt/Common/Constants/names.dart';
 import 'package:app_crt/Modals/interviewer.dart';
 import 'package:app_crt/Modals/student_model.dart';
 import 'package:app_crt/Providers/single_student_data.dart';
+import 'package:app_crt/Providers/single_student_data_poster.dart';
 import 'package:app_crt/Widgets/StudentWids/performance_table.dart';
 import 'package:app_crt/student_score_field.dart';
 import 'package:flutter/material.dart';
@@ -89,7 +90,9 @@ class _StudentScoreState extends ConsumerState<StudentScore> {
                                 index: 0),
                           ),
                           StudentScoreTestField(
-                            onPressed: () {},
+                            onPressed: () {
+                              ref.read(singleStudentDataProvider.notifier).getStudentPerformance(studentData, interviewerData)
+                            },
                           ),
                         ],
                       ),
