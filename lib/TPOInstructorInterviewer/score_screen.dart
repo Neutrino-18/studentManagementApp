@@ -12,7 +12,7 @@ class ScoreScreen extends ConsumerWidget {
   @override
   Widget build(context, WidgetRef ref) {
     print("Built Score Screen");
-    final allStudents = ref.watch(allStudentProvider);
+    var allStudents = ref.watch(allStudentProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -24,38 +24,43 @@ class ScoreScreen extends ConsumerWidget {
           },
         ),
       ),
-      body: allStudents.when(
-        data: (students) => ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          itemCount: students.length,
-          itemBuilder: (context, index) => GestureDetector(
-            onTap: () async {
-              final interviewer =
-                  await ref.read(interviewerDataProvider.future);
-              ref
-                  .read(singleStudentDataProvider.notifier)
-                  .getStudentPerformance(students[index], interviewer);
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => StudentScore(
-                    studentData: students[index],
-                    interviewerData: interviewer,
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await ref.refresh(allStudentProvider.future);
+        },
+        child: allStudents.when(
+          data: (students) => ListView.builder(
+            physics: const AlwaysScrollableScrollPhysics(),
+            itemCount: students.length,
+            itemBuilder: (context, index) => GestureDetector(
+              onTap: () async {
+                final interviewer =
+                    await ref.read(interviewerDataProvider.future);
+                ref
+                    .read(singleStudentDataProvider.notifier)
+                    .getStudentPerformance(students[index], interviewer);
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StudentScore(
+                      studentData: students[index],
+                      interviewerData: interviewer,
+                    ),
                   ),
-                ),
-                (route) => true,
-              );
-            },
-            child: ListTile(
-              title: Text(students[index].name),
+                  (route) => true,
+                );
+              },
+              child: ListTile(
+                title: Text(students[index].name),
+              ),
             ),
           ),
-        ),
-        error: (error, stackTrace) => Center(
-          child: Text("Error $error"),
-        ),
-        loading: () => const Center(
-          child: CircularProgressIndicator(),
+          error: (error, stackTrace) => Center(
+            child: Text("Error $error"),
+          ),
+          loading: () => const Center(
+            child: CircularProgressIndicator(),
+          ),
         ),
       ),
     );

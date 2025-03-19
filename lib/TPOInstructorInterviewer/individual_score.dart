@@ -1,6 +1,7 @@
 import 'package:app_crt/Common/Constants/names.dart';
 import 'package:app_crt/Modals/interviewer.dart';
 import 'package:app_crt/Modals/student_model.dart';
+import 'package:app_crt/Providers/all_students_provider.dart';
 import 'package:app_crt/Providers/single_student_data.dart';
 import 'package:app_crt/Providers/single_student_data_poster.dart';
 import 'package:app_crt/Widgets/StudentWids/performance_table.dart';
@@ -37,6 +38,7 @@ class _StudentScoreState extends ConsumerState<StudentScore> {
 
   @override
   Widget build(BuildContext context) {
+    ref.watch(allStudentProvider);
     icon = focusedTab == SubjectCategory.gdExtempore
         ? Icons.group
         : focusedTab == SubjectCategory.hr
@@ -83,13 +85,31 @@ class _StudentScoreState extends ConsumerState<StudentScore> {
                       child: TabBarView(
                         physics: const PageScrollPhysics(),
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 40),
-                            child: DropdownTableWidget(
-                                dropDownTitle: 'Current Performance',
-                                tableData: studentPerformanceData,
-                                index: 0),
+                          RefreshIndicator(
+                            onRefresh: () async {
+                              final value =
+                                  await ref.refresh(allStudentProvider.future);
+                              final subject = widget.interviewerData.subject;
+                              studentPerformanceData =
+                                  subject == SubjectCategory.tech
+                                      ? value.first.techPerform
+                                      : subject == SubjectCategory.gdExtempore
+                                          ? value.first.gdPerform
+                                          : subject == SubjectCategory.hr
+                                              ? value.first.hrPerform
+                                              : [];
+                            },
+                            child: SingleChildScrollView(
+                              physics: const AlwaysScrollableScrollPhysics(),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 40),
+                                child: DropdownTableWidget(
+                                    dropDownTitle: 'Current Performance',
+                                    tableData: studentPerformanceData,
+                                    index: 0),
+                              ),
+                            ),
                           ),
                           StudentScoreTestField(
                             remarkController: remarkController,
