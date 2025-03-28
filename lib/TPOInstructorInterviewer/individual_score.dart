@@ -5,7 +5,7 @@ import 'package:app_crt/Providers/all_students_provider.dart';
 import 'package:app_crt/Providers/single_student_data.dart';
 import 'package:app_crt/Providers/single_student_data_poster.dart';
 import 'package:app_crt/Widgets/StudentWids/performance_table.dart';
-import 'package:app_crt/student_score_field.dart';
+import 'package:app_crt/Widgets/TPOWids/student_score_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

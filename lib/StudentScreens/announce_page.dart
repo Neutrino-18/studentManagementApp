@@ -2,7 +2,7 @@ import "package:app_crt/Common/Constants/names.dart";
 import "package:app_crt/Common/Widgets/text_field.dart";
 import "package:app_crt/Providers/announcement_provider.dart";
 import "package:app_crt/Providers/login_info.dart";
-import "package:app_crt/custom_shape.dart";
+import "package:app_crt/Common/custom_shape.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
